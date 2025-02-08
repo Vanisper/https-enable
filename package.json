@@ -1,0 +1,29 @@
+{
+  "name": "nodejs-template",
+  "type": "module",
+  "version": "0.0.0",
+  "sideEffects": false,
+  "scripts": {
+    "preinstall": "npx only-allow pnpm",
+    "prepare": "npx lefthook install",
+    "commit": "git-cz",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^4.1.1",
+    "@commitlint/cli": "^19.7.1",
+    "@commitlint/config-conventional": "^19.7.1",
+    "commitizen": "^4.3.1",
+    "cz-git": "^1.11.0",
+    "eslint": "^9.20.0",
+    "jiti": "^2.4.2",
+    "lefthook": "^1.10.10",
+    "typescript": "^5.7.3"
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-git"
+    }
+  }
+}
