@@ -8,7 +8,8 @@
     "prepare": "npx lefthook install",
     "commit": "git-cz",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "clean:deps": "pnpm recursive exec -- rimraf node_modules && rimraf node_modules"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^4.1.1",
@@ -19,6 +20,7 @@
     "eslint": "^9.20.0",
     "jiti": "^2.4.2",
     "lefthook": "^1.10.10",
+    "rimraf": "^6.0.1",
     "tsconfig": "workspace:*",
     "typescript": "^5.7.3"
   },
