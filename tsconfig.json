@@ -1,18 +1,5 @@
 {
-  "compilerOptions": {
-    "target": "ESNext",
-    "lib": ["DOM", "ESNext"],
-    "baseUrl": ".",
-    "module": "ESNext",
-    "moduleResolution": "Bundler",
-    "resolveJsonModule": true,
-    "strict": true,
-    "strictNullChecks": true,
-    "noImplicitAny": true,
-    "esModuleInterop": true,
-    "skipDefaultLibCheck": true,
-    "skipLibCheck": true
-  },
-  "include": ["packages/**/*.ts"],
-  "exclude": ["node_modules", "dist", "**/*.js"]
+  "extends": "tsconfig/tsconfig.base.json",
+  "include": ["./*.ts"],
+  "exclude": ["node_modules"]
 }
