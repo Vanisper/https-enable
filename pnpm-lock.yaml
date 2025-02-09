@@ -42,7 +42,11 @@ importers:
         specifier: ^5.7.3
         version: 5.7.3
 
-  packages/mkcert: {}
+  packages/mkcert:
+    devDependencies:
+      tsconfig:
+        specifier: workspace:*
+        version: link:../tsconfig
 
   packages/tsconfig: {}
 

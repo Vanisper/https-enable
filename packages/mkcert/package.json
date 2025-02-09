@@ -1,0 +1,9 @@
+{
+  "name": "@https-enable/mkcert",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "scripts": {},
+  "devDependencies": {
+    "tsconfig": "workspace:*"
+  }
+}
