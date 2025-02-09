@@ -1,27 +1,11 @@
-# nodejs-template
+# https-enable
 
-一个 Node.js 项目快速起手模板。
+让你的 nodejs 后端项目支持 https
 
-## 构建过程
+## 功能实现
 
-```bash
-# commitlint
-pnpm install --save-dev @commitlint/cli @commitlint/config-conventional
-# commitizen
-pnpm install --save-dev commitizen cz-git
-# eslint & lefthook（ts 版的 eslint 配置文件需要 jiti 支持）
-pnpm install --save-dev eslint jiti @antfu/eslint-config lefthook
-```
-
-安装了 `commitizen` & `cz-git` 之后，
-需要在 `package.json` 中添加如下配置：
-
-```json
-{
-  "config": {
-    "commitizen": {
-      "path": "node_modules/cz-git"
-    }
-  }
-}
-```
+- [ ] 自动生成本地 ssl 证书，基于 [mkcert](https://github.com/Subash/mkcert) 实现
+- [ ] 证书文件的本地缓存以及自动更新
+- [ ] 证书的有效性校验
+- [ ] nodejs 后端框架 app 的 https 支持
+- [ ] http 与 https 同端口
