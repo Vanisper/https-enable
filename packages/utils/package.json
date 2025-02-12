@@ -1,0 +1,32 @@
+{
+  "name": "utils",
+  "version": "0.0.0",
+  "private": true,
+  "license": "MIT",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "unbuild",
+    "dev": "unbuild --stub",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "error-stack-parser-es": "^1.0.5",
+    "picomatch": "^4.0.2",
+    "tinyglobby": "^0.2.10"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.1",
+    "@types/picomatch": "^3.0.2",
+    "tsconfig": "workspace:*",
+    "types": "workspace:*",
+    "unbuild": "^3.3.1"
+  }
+}
