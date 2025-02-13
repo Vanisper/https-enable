@@ -15,13 +15,13 @@
     "@antfu/eslint-config": "^4.1.1",
     "@commitlint/cli": "^19.7.1",
     "@commitlint/config-conventional": "^19.7.1",
+    "@https-enable/tsconfig": "workspace:*",
     "commitizen": "^4.3.1",
     "cz-git": "^1.11.0",
     "eslint": "^9.20.0",
     "jiti": "^2.4.2",
     "lefthook": "^1.10.10",
     "rimraf": "^6.0.1",
-    "tsconfig": "workspace:*",
     "typescript": "^5.7.3"
   },
   "config": {

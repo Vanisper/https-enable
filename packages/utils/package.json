@@ -1,5 +1,5 @@
 {
-  "name": "utils",
+  "name": "@https-enable/utils",
   "version": "0.0.0",
   "private": true,
   "license": "MIT",
@@ -23,10 +23,10 @@
     "tinyglobby": "^0.2.10"
   },
   "devDependencies": {
+    "@https-enable/tsconfig": "workspace:*",
+    "@https-enable/types": "workspace:*",
     "@types/node": "^22.13.1",
     "@types/picomatch": "^3.0.2",
-    "tsconfig": "workspace:*",
-    "types": "workspace:*",
     "unbuild": "^3.3.1"
   }
 }

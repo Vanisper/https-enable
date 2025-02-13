@@ -1,5 +1,5 @@
 {
-  "extends": "tsconfig/tsconfig.base.json",
+  "extends": "@https-enable/tsconfig/tsconfig.base.json",
   "include": ["./*.ts"],
   "exclude": ["node_modules"]
 }

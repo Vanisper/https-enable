@@ -1,5 +1,5 @@
 {
-  "extends": "tsconfig/tsconfig.node.json",
+  "extends": "@https-enable/tsconfig/tsconfig.node.json",
   "compilerOptions": {
     "incremental": false,
     "composite": false,
