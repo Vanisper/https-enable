@@ -2,7 +2,7 @@ import path from 'node:path'
 import { parse as errorParse } from 'error-stack-parser-es/lite'
 import picomatch from 'picomatch'
 import { isWindows } from './common'
-import { WindowsSlashRE } from './constant'
+import { WindowsDiskRE, WindowsSlashRE } from './constant'
 
 export function slash(p: string): string {
   return p.replace(WindowsSlashRE, '/')
@@ -42,15 +42,41 @@ export function getCommonBase(globsResolved: string[]): null | string {
 }
 
 /**
+ * 处理绝对路径
+ */
+export function parseAbsolute(pathStr?: string | null) {
+  if (!pathStr)
+    return pathStr
+  pathStr = slash(pathStr)
+  return isWindows && pathStr.startsWith('/') && pathStr.slice(1).match(WindowsDiskRE)
+    ? pathStr.slice(1)
+    : pathStr
+}
+
+/**
  * 获取调用方文件路径
  */
-export function getCallerPath(depth = 3) {
+export function getCallerPath(depth = 2) {
   const error = new Error('get-caller-path')
   const stacks = errorParse(error)
+  const filesList = Array.from(new Set(stacks.map(i => i.file || null)))
+
+  /**
+   * 匹配 https,http,file 协议的路径，提取文件名，允许带行、列号
+   * @description `^((?:file|https?):\/\/)?` 匹配协议
+   * @description `(.*?)` 非贪婪匹配任意字符，直到遇到可选的冒号和数字（行号、列号）
+   * @description `(?<file>.*?)` 可通过 `match.groups.file` 获取该分组的值
+   * @description `(?::\d+)?(?::\d+)?` 匹配可选的 `:行号和:列号` 部分，最多两个
+   */
+  const linePattern = /^((?:file|https?):\/\/)?(?<file>.*?)(?::\d+)?(?::\d+)?$/
+
   // 目标堆栈层级
   const targetIndex = depth
-  const targetLine = stacks.at(-1 * targetIndex)
-  return targetLine?.file || null
+  const targetLine = filesList[targetIndex]
+
+  const match = targetLine?.match(linePattern)?.groups?.file
+
+  return parseAbsolute(match) || null
 
   // const stack = error.stack?.split('\n') || []
 
