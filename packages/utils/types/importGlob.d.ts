@@ -6,7 +6,9 @@ export interface ProjectOptions {
    */
   root?: string
   /**
-   * 由哪个文件导入，需要手动指定 `import.meta.url`
+   * 由哪个文件导入，调用方的绝对路径
+   * @description 可选，如果不传则会自动获取
+   * @description 如要手动传递，则必须传入 `import.meta.url`
    * @default undefined
    */
   callerId?: string
