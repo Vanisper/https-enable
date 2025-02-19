@@ -70,14 +70,12 @@ export const importGlob = async function<T, O extends (GeneralImportGlobOptions 
   }
 
   // 3. 构建导入映射
-  type Eager = typeof eager
   const imports: (O extends { eager: true } ? true : false) extends true
     ? Record<string, T>
     : Record<string, () => Promise<T>> = {}
 
   for (const file of files) {
     const paths = resolvePaths(file)
-    const filePath = paths.filePath
     const importPath = paths.importPath
 
     // TODO: 处理查询参数，暂时没有此场景
