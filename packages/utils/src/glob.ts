@@ -1,19 +1,29 @@
 /* eslint-disable unused-imports/no-unused-vars */
-import type { GeneralImportGlobOptions, ProjectOptions } from '../types/importGlob'
+import type { ImportGlobOptions, KnownAsTypeMap, ProjectOptions } from '../types/importGlob'
+import fs from 'node:fs'
 import path from 'node:path'
 import process from 'node:process'
 import { escapePath, glob as globby } from 'tinyglobby'
 import { getCallerPath, getCommonBase, normalizePath, slash } from './path'
 
-export const importGlob = async function<T, O extends (GeneralImportGlobOptions & ProjectOptions)>(pattern: string | string[], options?: O) {
+const forceDefaultAs = ['raw', 'url']
+const allowImportExt = ['.js', '.ts', '.mjs', '.mts', '.cjs', '.cts']
+
+export const importGlob = async function<
+  Eager extends boolean,
+  As extends keyof KnownAsTypeMap | string,
+  T = As extends keyof KnownAsTypeMap ? KnownAsTypeMap[As] : unknown,
+>(pattern: string | string[], options?: ImportGlobOptions<Eager, As> & ProjectOptions) {
   const {
     eager = false,
     import: importName,
     query,
+    as,
     exhaustive = false,
     // ProjectOptions
     root: rootPath = process.cwd(),
     callerId = getCallerPath(),
+    fallback = false,
   } = options || {}
 
   if (!callerId) {
@@ -70,7 +80,7 @@ export const importGlob = async function<T, O extends (GeneralImportGlobOptions 
   }
 
   // 3. 构建导入映射
-  const imports: (O extends { eager: true } ? true : false) extends true
+  const imports: (Eager extends true ? true : false) extends true
     ? Record<string, T>
     : Record<string, () => Promise<T>> = {}
 
@@ -93,18 +103,30 @@ export const importGlob = async function<T, O extends (GeneralImportGlobOptions 
         : undefined
 
     // 4. 处理不同导入模式
-    if (eager) {
-      const module = await dynamicImport(importPath, dir)
-      imports[file] = importKey
-        ? module[importKey]
-        : module
-    }
-    else {
-      imports[file] = async () => {
-        const module = await dynamicImport(importPath, dir)
-        return importKey
+    const targetType = as && forceDefaultAs.includes(as) ? as : undefined
+    try {
+      if (eager) {
+        const module = await dynamicImport(importPath, { dir, as })
+        imports[file] = importKey && !targetType
           ? module[importKey]
           : module
+      }
+      else {
+        imports[file] = async () => {
+          const module = await dynamicImport(importPath, { dir, as })
+          return importKey && !targetType
+            ? module[importKey]
+            : module
+        }
+      }
+    }
+    catch (error) {
+      const ext = path.extname(file)
+      if (fallback && ext && !allowImportExt.includes(ext)) {
+        imports[file] = fs.readFileSync(file, 'utf-8') as unknown as T
+      }
+      else {
+        throw error
       }
     }
   }
@@ -115,12 +137,24 @@ export const importGlob = async function<T, O extends (GeneralImportGlobOptions 
 /**
  * 动态导入函数
  * @param modulePath 函数导入路径
- * @param dir 如果指定此参数，则将会与第一个参数拼接
+ * @param options
+ * @param options.dir 如果指定此参数，则将会与第一个参数拼接
+ * @param options.as
  */
-async function dynamicImport(modulePath: string, dir?: string) {
+async function dynamicImport(modulePath: string, options: { dir?: string, as?: string } = {}) {
   let targetPath = modulePath
-  if (dir && !path.isAbsolute(modulePath) && path.isAbsolute(dir)) {
-    targetPath = path.join(dir, targetPath)
+  if (options.dir && !path.isAbsolute(modulePath) && path.isAbsolute(options.dir)) {
+    targetPath = path.join(options.dir, targetPath)
+  }
+
+  const targetType = options.as && forceDefaultAs.includes(options.as) ? options.as : undefined
+  if (options.as && targetType) {
+    if (targetType === 'url') {
+      return slash(targetPath)
+    }
+    else if (targetType === 'raw') {
+      return fs.readFileSync(targetPath, 'utf-8')
+    }
   }
   return await import(targetPath)
 }

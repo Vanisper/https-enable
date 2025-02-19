@@ -12,6 +12,10 @@ export interface ProjectOptions {
    * @default undefined
    */
   callerId?: string
+  /**
+   * 兜底未知文件作为 raw 处理
+   */
+  fallback?: boolean
 }
 
 export interface ImportGlobOptions<
