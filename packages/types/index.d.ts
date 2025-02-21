@@ -35,3 +35,21 @@ export type MapTuple<T extends ReadonlyArray<string>> = {
 export type MapArray<T extends string | number | symbol> = {
   [K in T]: number;
 }
+
+type PickElements<
+  T extends ReadonlyArray<string>,
+  K extends string,
+> = T extends readonly [infer First, ...infer Rest]
+  ? First extends K
+    ? [First, ...PickElements<Rest, K>]
+    : PickElements<Rest, K>
+  : []
+
+type OmitElements<
+  T extends ReadonlyArray<string>,
+  K extends string,
+> = T extends readonly [infer First, ...infer Rest]
+  ? First extends K
+    ? OmitElements<Rest, K>
+    : [First, ...OmitElements<Rest, K>]
+  : []
