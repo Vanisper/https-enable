@@ -28,7 +28,7 @@ export type EnumToRecord<EnumType> = {
 
 export type IsTuple<T> = T extends readonly [any, ...any[]] ? true : false
 
-export type MapTuple<T extends readonly string[]> = {
+export type MapTuple<T extends ReadonlyArray<string>> = {
   [K in keyof T & `${number}` as T[K]]: K extends `${infer N extends number}` ? N : never;
 }
 
