@@ -72,7 +72,7 @@ export function getCallerPath(depth = 2) {
 
   // 目标堆栈层级
   const targetIndex = depth
-  const targetLine = filesList[targetIndex]
+  const targetLine = filesList[targetIndex] || filesList.at(-1)
 
   const match = targetLine?.match(linePattern)?.groups?.file
 
