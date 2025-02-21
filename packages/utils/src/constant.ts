@@ -6,3 +6,6 @@ export const WindowsSlashRE = /\\/g
  * @description 最好先将 windows下的路径转换为 posix 风格，否则由于字符串斜杠转义问题，可能会导致正则匹配失败
  */
 export const WindowsDiskRE = /^[a-z]?:(?:\/|\\\\)/i
+
+// eslint-disable-next-line no-control-regex
+export const ColorStringRE = /\x1B[[(?);]{0,2}(;?\d)*./g
