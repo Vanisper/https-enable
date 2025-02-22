@@ -1,12 +1,10 @@
 import type { MapTuple } from '@https-enable/types'
 import type { FormatClass } from './format'
 import type { TransportInstance } from './transports/type'
+import type { SimpleLevelTuple } from './triple-beam'
 import type { SimpleLevelColor } from './triple-beam/type'
-import { SimpleLevelTuple } from './triple-beam/type'
 
-const LevelTuple = SimpleLevelTuple
-
-export type LogLevel = MapTuple<typeof LevelTuple>
+export type LogLevel = MapTuple<typeof SimpleLevelTuple>
 
 export type LogLevelColor = SimpleLevelColor
 
