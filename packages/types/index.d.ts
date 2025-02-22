@@ -36,20 +36,32 @@ export type MapArray<T extends string | number | symbol> = {
   [K in T]: number;
 }
 
-type PickElements<
+export type PickElements<
   T extends ReadonlyArray<string>,
   K extends string,
-> = T extends readonly [infer First, ...infer Rest]
+> = T extends readonly [infer First extends string, ...infer Rest extends ReadonlyArray<string>]
   ? First extends K
     ? [First, ...PickElements<Rest, K>]
     : PickElements<Rest, K>
   : []
 
-type OmitElements<
+export type OmitElements<
   T extends ReadonlyArray<string>,
   K extends string,
-> = T extends readonly [infer First, ...infer Rest]
+> = T extends readonly [infer First, ...infer Rest extends ReadonlyArray<string>]
   ? First extends K
     ? OmitElements<Rest, K>
     : [First, ...OmitElements<Rest, K>]
   : []
+
+export type Zip<
+  T extends ReadonlyArray<string>,
+  V extends { [K in keyof T]: any },
+> = {
+  [K in keyof T & `${number}` as T[K]]: V[K]
+}
+
+/**
+ * 将元组中的字面量转为大写
+ */
+export type UppercaseUnion<T extends ReadonlyArray<string>> = Uppercase<T[number]>
