@@ -1,9 +1,33 @@
 {
   "name": "@https-enable/mkcert",
+  "type": "module",
   "version": "0.0.0",
-  "main": "dist/index.js",
-  "scripts": {},
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "unbuild",
+    "dev": "unbuild --stub",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "@https-enable/logger": "workspace:*",
+    "@https-enable/utils": "workspace:*",
+    "dayjs": "^1.11.13",
+    "mkcert": "^3.2.0",
+    "node-forge": "^1.3.1"
+  },
   "devDependencies": {
-    "tsconfig": "workspace:*"
+    "@https-enable/tsconfig": "workspace:*",
+    "@https-enable/types": "workspace:*",
+    "@types/node": "^22.13.1",
+    "@types/node-forge": "^1.3.11",
+    "unbuild": "^3.3.1"
   }
 }
