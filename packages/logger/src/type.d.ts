@@ -1,7 +1,8 @@
 import type { MapTuple } from '@https-enable/types'
 import type { FormatClass } from './format'
 import type { TransportInstance } from './transports/type'
-import type { SimpleLevelColor, SimpleLevelTuple } from './triple-beam/type'
+import type { SimpleLevelColor } from './triple-beam/type'
+import { SimpleLevelTuple } from './triple-beam/type'
 
 const LevelTuple = SimpleLevelTuple
 
