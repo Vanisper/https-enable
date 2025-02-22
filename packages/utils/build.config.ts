@@ -9,6 +9,8 @@ export default defineBuildConfig({
     inlineDependencies: false,
   },
   failOnWarn: false,
-  // 排除隐式外部依赖
-  externals: [],
+  // 声明隐式外部依赖（消除构建时警告）
+  externals: [
+    '@https-enable/types',
+  ],
 })
