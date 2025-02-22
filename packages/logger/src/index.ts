@@ -34,8 +34,9 @@ export class Logger {
     }
   }
 
-  static createLogFormat(colorize = false) {
+  static createLogFormat(colorize = false, label?: string) {
     const colorizer = format.colorize()
+    const appLabel = !!label && format.label({ label, message: true })
     const timestamp = format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss.SSS' })
     const logFormat = format.printf((info) => {
       const levelWithoutColor = info.level.replace(ColorStringRE, '')
@@ -46,8 +47,8 @@ export class Logger {
     })
 
     return colorize
-      ? format.combine(colorizer, timestamp, logFormat)
-      : format.combine(timestamp, logFormat)
+      ? appLabel ? format.combine(colorizer, appLabel, timestamp, logFormat) : format.combine(colorizer, timestamp, logFormat)
+      : appLabel ? format.combine(appLabel, timestamp, logFormat) : format.combine(timestamp, logFormat)
   }
 
   updateLogFormat = (colorize = false) => {
