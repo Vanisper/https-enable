@@ -53,3 +53,4 @@ export function styleText(format: FormatKeys | FormatKeys[], text: string): stri
 export * from './common'
 export * from './constants'
 export * from './styles'
+export type * from './type'
