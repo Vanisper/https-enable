@@ -31,6 +31,11 @@ export function numEnum(arr: any[]): any {
   }, {})
 }
 
-export function isNil(value?: any) {
-  return [undefined, null].includes(value)
+export function isNil(value?: any, emptyStringCheck = false) {
+  const checkList = [undefined, null, '']
+  if (emptyStringCheck !== true) {
+    checkList.pop()
+  }
+
+  return checkList.includes(value)
 }
