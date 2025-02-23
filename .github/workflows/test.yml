@@ -33,8 +33,8 @@ jobs:
       # endregion
 
       # region: 前端项目构建，根据具体项目情况修改，此处以 <https://github.com/uni-ku/bundle-optimizer> 为例
-      - name: Install dependencies
-        run: pnpm install
+      - name: Install dependencies for monorepo
+        run: pnpm install --recursive --frozen-lockfile
 
       - name: Run Test
         run: pnpm run test:coverage
