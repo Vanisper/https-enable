@@ -1,6 +1,6 @@
 import type { ColorKeys } from '../../triple-beam/type'
 import type { TransformFunction } from '../type'
-import colors from '@colors/colors/safe.js'
+import { styleText } from '@https-enable/colors'
 import { LEVEL, MESSAGE } from '../../triple-beam'
 
 export type ColorMap = Record<string, string | string[]>
@@ -70,25 +70,7 @@ export class Colorizer {
       return String(message)
     }
 
-    //
-    // If the color for the level is just a string
-    // then attempt to colorize the message with it.
-    //
-    if (!Array.isArray(colorSpec)) {
-      return colors[colorSpec](message)
-    }
-
-    //
-    // If it is an Array then iterate over that Array, applying
-    // the colors function for each item.
-    //
-    for (const style of colorSpec) {
-      // 添加样式存在性检查
-      const target = colors[style]
-      message = target(message)
-    }
-
-    return message
+    return styleText(colorSpec, message)
   }
 
   /**
