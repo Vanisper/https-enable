@@ -1,5 +1,6 @@
 import type { CertificatePath, CreateOptions } from './type'
 
+import { isNil } from '@https-enable/utils'
 import { createCertificate, readCertificate } from './common'
 import logger from './logger'
 import { verifyCertificate } from './verify'
@@ -41,13 +42,13 @@ export async function defineCertificate(options?: Pick<CreateOptions, 'validity'
 
   // eslint-disable-next-line ts/ban-ts-comment
   // @ts-ignore
-  if ([undefined, null, ''].includes(options?.validity)) {
+  if (isNil(options?.validity, true)) {
     // "validity" is not defined and will be set to 0.
     logger.warn('\'validity\' is undefined; defaulting to 0.')
   }
   // eslint-disable-next-line ts/ban-ts-comment
   // @ts-ignore
-  if ([undefined, null, ''].includes(options?.domains)) {
+  if (isNil(options?.domains, true)) {
     logger.warn('\'domains\' is undefined; defaulting to \'0.0.0.0\'.')
   }
 
