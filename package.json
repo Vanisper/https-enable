@@ -11,20 +11,25 @@
     "lint:fix": "eslint . --fix",
     "clean:deps": "pnpm recursive exec -- rimraf node_modules && rimraf node_modules",
     "dev": "pnpm run -r --parallel dev",
-    "build": "pnpm run -r build"
+    "build": "pnpm run -r build",
+    "test": "vitest",
+    "test:mkcert": "npm run test -- --project @https-enable/mkcert",
+    "test:coverage": "npm run test -- --coverage"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^4.1.1",
     "@commitlint/cli": "^19.7.1",
     "@commitlint/config-conventional": "^19.7.1",
     "@https-enable/tsconfig": "workspace:*",
+    "@vitest/coverage-v8": "3.0.6",
     "commitizen": "^4.3.1",
     "cz-git": "^1.11.0",
     "eslint": "^9.20.0",
     "jiti": "^2.4.2",
     "lefthook": "^1.10.10",
     "rimraf": "^6.0.1",
-    "typescript": "^5.7.3"
+    "typescript": "^5.7.3",
+    "vitest": "^3.0.6"
   },
   "config": {
     "commitizen": {
