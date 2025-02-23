@@ -30,3 +30,7 @@ export function numEnum(arr: any[]): any {
     return acc
   }, {})
 }
+
+export function isNil(value?: any) {
+  return [undefined, null].includes(value)
+}
