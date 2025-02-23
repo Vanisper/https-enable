@@ -19,4 +19,4 @@ export interface VerifyOptions {
   rejectUnauthorized?: boolean
 }
 
-export type CreateOptions = Prettify<CertificateAuthorityOptions & { domains: string[] | string }>
+export type CreateOptions = Prettify<CertificateAuthorityOptions & { domains: string[] | string, force: boolean }>

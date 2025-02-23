@@ -57,7 +57,8 @@ export function saveCertificate(cert: string, key: string, options: CertificateP
   return { keyPath, certPath }
 }
 
-export async function createCertificate(options: CreateOptions): Promise<Certificate> {
+export async function createCertificate(_options: CreateOptions): Promise<Certificate> {
+  const { force, ...options } = _options
   return new Promise((resolve, reject) => {
     createCA(options)
       .then((ca) => {

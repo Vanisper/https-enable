@@ -7,7 +7,7 @@ import { verifyCertificate } from './verify'
 
 export async function initSSLCertificate(options: CreateOptions, pathOptions?: CertificatePath) {
   const pem = readCertificate(pathOptions)
-  if (pem !== null) {
+  if (pem !== null && !options.force) {
     const verifyRes = await verifyCertificate(pem.key, pem.cert)
 
     if (!verifyRes.match) {
@@ -23,7 +23,7 @@ export async function initSSLCertificate(options: CreateOptions, pathOptions?: C
     return pem
   }
 
-  logger.warn('➜  证书和密钥不存在，正在生成证书和密钥……')
+  logger.warn(`➜  ${options.force ? '强制生成证书和密钥……' : '证书和密钥不存在，正在生成证书和密钥……'}`)
   const httpsOptions = await createCertificate(options)
   logger.info('➜  证书和密钥已生成')
 
@@ -38,6 +38,7 @@ export async function defineCertificate(options?: Pick<CreateOptions, 'validity'
     locality = '',
     validity = 0,
     domains = '0.0.0.0',
+    force = false,
   } = options ?? {}
 
   // eslint-disable-next-line ts/ban-ts-comment
@@ -52,7 +53,7 @@ export async function defineCertificate(options?: Pick<CreateOptions, 'validity'
     logger.warn('\'domains\' is undefined; defaulting to \'0.0.0.0\'.')
   }
 
-  return await initSSLCertificate({ organization, countryCode, state, locality, validity, domains }, pathOptions)
+  return await initSSLCertificate({ organization, countryCode, state, locality, validity, domains, force }, pathOptions)
 }
 
 export * from './common'
