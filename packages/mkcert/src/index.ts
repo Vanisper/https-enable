@@ -4,7 +4,7 @@ import { createCertificate, readCertificate } from './common'
 import logger from './logger'
 import { verifyCertificate } from './verify'
 
-export default async function initSSLCertificate(options: CreateOptions, pathOptions?: CertificatePath) {
+export async function initSSLCertificate(options: CreateOptions, pathOptions?: CertificatePath) {
   const pem = readCertificate(pathOptions)
   if (pem !== null) {
     const verifyRes = await verifyCertificate(pem.key, pem.cert)
@@ -29,7 +29,30 @@ export default async function initSSLCertificate(options: CreateOptions, pathOpt
   return httpsOptions
 }
 
-export { initSSLCertificate }
+export async function defineCertificate(options?: Pick<CreateOptions, 'validity'> & Partial<Omit<CreateOptions, 'validity'>>, pathOptions?: CertificatePath) {
+  const {
+    organization = '',
+    countryCode = '',
+    state = '',
+    locality = '',
+    validity = 0,
+    domains = '0.0.0.0',
+  } = options ?? {}
+
+  // eslint-disable-next-line ts/ban-ts-comment
+  // @ts-ignore
+  if ([undefined, null, ''].includes(options?.validity)) {
+    // "validity" is not defined and will be set to 0.
+    logger.warn('\'validity\' is undefined; defaulting to 0.')
+  }
+  // eslint-disable-next-line ts/ban-ts-comment
+  // @ts-ignore
+  if ([undefined, null, ''].includes(options?.domains)) {
+    logger.warn('\'domains\' is undefined; defaulting to \'0.0.0.0\'.')
+  }
+
+  return await initSSLCertificate({ organization, countryCode, state, locality, validity, domains }, pathOptions)
+}
 
 export * from './common'
 export * from './logger'
