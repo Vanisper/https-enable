@@ -6,6 +6,8 @@ import { createCA, createCert } from 'mkcert'
 
 import logger from './logger'
 
+export const defaultCertificateBasePath = path.join(process.cwd(), 'cert')
+
 export function processCertPath(certPath: CertificatePath) {
   if ('base' in certPath) {
     // 处理 base 路径格式
@@ -24,7 +26,7 @@ export function processCertPath(certPath: CertificatePath) {
   }
 }
 
-export function readCertificate(options: CertificatePath = { base: path.join(process.cwd(), 'cert') }) {
+export function readCertificate(options: CertificatePath = { base: defaultCertificateBasePath }) {
   try {
     const { keyPath, certPath } = processCertPath(options)
     return {
@@ -41,7 +43,7 @@ export function readCertificate(options: CertificatePath = { base: path.join(pro
 /**
  * 在项目根目录下创建一个 mkcert 目录，用于存放生成的证书和密钥文件
  */
-export function saveCertificate(cert: string, key: string, options: CertificatePath = { base: path.join(process.cwd(), 'cert') }) {
+export function saveCertificate(cert: string, key: string, options: CertificatePath = { base: defaultCertificateBasePath }) {
   const { keyPath, certPath } = processCertPath(options)
   const CERTS_DIR = path.dirname(certPath)
 
