@@ -13,7 +13,7 @@ export async function initSSLCertificate(options: CreateOptions, pathOptions?: C
     if (!verifyRes.match) {
       logger.error(`➜  ${verifyRes.message}`)
       logger.warn('➜  证书和密钥失效，正在重新生成证书和密钥……')
-      const httpsOptions = await createCertificate(options)
+      const httpsOptions = await createCertificate(options, pathOptions)
       logger.info('➜  证书和密钥已更新')
 
       return httpsOptions
@@ -24,7 +24,7 @@ export async function initSSLCertificate(options: CreateOptions, pathOptions?: C
   }
 
   logger.warn(`➜  ${options.force ? '强制生成证书和密钥……' : '证书和密钥不存在，正在生成证书和密钥……'}`)
-  const httpsOptions = await createCertificate(options)
+  const httpsOptions = await createCertificate(options, pathOptions)
   logger.info('➜  证书和密钥已生成')
 
   return httpsOptions
