@@ -36,6 +36,9 @@ jobs:
       - name: Install dependencies for monorepo
         run: pnpm install --recursive --frozen-lockfile
 
+      - name: Build all projects
+        run: pnpm run build
+
       - name: Run Test
         run: pnpm run test:coverage
       # endregion
