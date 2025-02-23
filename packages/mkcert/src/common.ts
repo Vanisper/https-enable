@@ -52,7 +52,7 @@ export function saveCertificate(cert: string, key: string, options: CertificateP
   fs.writeFileSync(keyPath, key, { encoding: 'utf-8' })
   fs.writeFileSync(certPath, cert, { encoding: 'utf-8' })
 
-  logger.info(`Certificate saved to ${certPath}`)
+  logger.info(`Certificate saved to ${path.resolve(certPath)}`)
 
   return { keyPath, certPath }
 }
