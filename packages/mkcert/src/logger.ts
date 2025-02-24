@@ -1,12 +1,10 @@
 import Logger, { Transports } from '@https-enable/logger'
 
-export { Logger }
-
 function createLogFormat(colorize = false) {
   return Logger.createLogFormat(colorize, 'mkcert')
 }
 
-export default new Logger({
+export const logger = new Logger({
   format: createLogFormat(),
   transports: [
     new Transports.Console({
@@ -14,3 +12,7 @@ export default new Logger({
     }),
   ],
 })
+
+export default logger
+
+export { Logger }
