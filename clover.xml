@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1740362606057" clover="3.2.0">
-  <project timestamp="1740362606057" name="All files">
-    <metrics statements="3701" coveredstatements="646" conditionals="185" coveredconditionals="124" methods="129" coveredmethods="76" elements="4015" coveredelements="846" complexity="0" loc="3701" ncloc="3701" packages="13" files="56" classes="56"/>
+<coverage generated="1740368073711" clover="3.2.0">
+  <project timestamp="1740368073711" name="All files">
+    <metrics statements="3703" coveredstatements="647" conditionals="185" coveredconditionals="124" methods="129" coveredmethods="76" elements="4017" coveredelements="847" complexity="0" loc="3703" ncloc="3703" packages="13" files="56" classes="56"/>
     <package name="colors.dist">
       <metrics statements="202" coveredstatements="92" conditionals="12" coveredconditionals="9" methods="7" coveredmethods="5"/>
       <file name="index.cjs" path="/home/runner/work/https-enable/https-enable/packages/colors/dist/index.cjs">
@@ -2588,9 +2588,9 @@
       </file>
     </package>
     <package name="mkcert.dist">
-      <metrics statements="389" coveredstatements="0" conditionals="3" coveredconditionals="1" methods="3" coveredmethods="1"/>
+      <metrics statements="390" coveredstatements="0" conditionals="3" coveredconditionals="1" methods="3" coveredmethods="1"/>
       <file name="index.cjs" path="/home/runner/work/https-enable/https-enable/packages/mkcert/dist/index.cjs">
-        <metrics statements="204" coveredstatements="0" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <metrics statements="205" coveredstatements="0" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="1" count="0" type="cond" truecount="0" falsecount="1"/>
         <line num="3" count="0" type="stmt"/>
         <line num="4" count="0" type="stmt"/>
@@ -2795,10 +2795,11 @@
         <line num="210" count="0" type="stmt"/>
         <line num="211" count="0" type="stmt"/>
         <line num="212" count="0" type="stmt"/>
+        <line num="213" count="0" type="stmt"/>
       </file>
       <file name="index.d.mts" path="/home/runner/work/https-enable/https-enable/packages/mkcert/dist/index.d.mts">
         <metrics statements="1" coveredstatements="0" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
-        <line num="3" count="0" type="stmt"/>
+        <line num="4" count="0" type="stmt"/>
       </file>
       <file name="index.mjs" path="/home/runner/work/https-enable/https-enable/packages/mkcert/dist/index.mjs">
         <metrics statements="184" coveredstatements="0" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="0"/>
@@ -2989,7 +2990,7 @@
       </file>
     </package>
     <package name="mkcert.src">
-      <metrics statements="204" coveredstatements="204" conditionals="42" coveredconditionals="39" methods="10" coveredmethods="10"/>
+      <metrics statements="205" coveredstatements="205" conditionals="42" coveredconditionals="39" methods="10" coveredmethods="10"/>
       <file name="common.ts" path="/home/runner/work/https-enable/https-enable/packages/mkcert/src/common.ts">
         <metrics statements="64" coveredstatements="64" conditionals="13" coveredconditionals="11" methods="4" coveredmethods="4"/>
         <line num="2" count="1" type="stmt"/>
@@ -3105,18 +3106,19 @@
         <line num="61" count="1" type="stmt"/>
       </file>
       <file name="logger.ts" path="/home/runner/work/https-enable/https-enable/packages/mkcert/src/logger.ts">
-        <metrics statements="12" coveredstatements="12" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
+        <metrics statements="13" coveredstatements="13" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
-        <line num="5" count="4" type="cond" truecount="1" falsecount="0"/>
-        <line num="6" count="4" type="stmt"/>
-        <line num="7" count="4" type="stmt"/>
+        <line num="3" count="4" type="cond" truecount="1" falsecount="0"/>
+        <line num="4" count="4" type="stmt"/>
+        <line num="5" count="4" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
         <line num="9" count="1" type="stmt"/>
         <line num="10" count="1" type="stmt"/>
         <line num="11" count="1" type="stmt"/>
         <line num="12" count="1" type="stmt"/>
         <line num="13" count="1" type="stmt"/>
         <line num="14" count="1" type="stmt"/>
-        <line num="15" count="1" type="stmt"/>
         <line num="16" count="1" type="stmt"/>
       </file>
       <file name="verify.ts" path="/home/runner/work/https-enable/https-enable/packages/mkcert/src/verify.ts">
