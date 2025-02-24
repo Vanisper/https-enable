@@ -1,38 +1,9 @@
 import { createHash } from 'node:crypto'
-import { existsSync, readFileSync, rmSync } from 'node:fs'
+import { readFileSync, rmSync } from 'node:fs'
 import { resolve } from 'node:path'
 import { afterEach, describe, expect, it } from 'vitest'
-import { defaultCertificateBasePath, defineCertificate, processCertPath } from '../../src'
-
-// 证书生成路径
-const CACHE_PATH = 'test-cache/mkcert'
-
-async function mkcertCheck(...args: Parameters<typeof defineCertificate>) {
-  const [_, pathOptions] = args
-
-  const { keyPath, certPath } = processCertPath(pathOptions ?? { base: defaultCertificateBasePath })
-  const files = [keyPath, certPath]
-  // 执行证书生成
-  const { cert, key } = await defineCertificate(...args)
-
-  // 验证文件存在性
-  files.forEach((file) => {
-    const filePath = resolve(file)
-    expect(existsSync(filePath), `${filePath} 文件未生成`).toBe(true)
-  })
-
-  // 验证证书基础格式
-  const certContent = readFileSync(resolve(certPath), 'utf-8')
-  expect(certContent).toMatch(/-----BEGIN CERTIFICATE-----/)
-  expect(certContent).toMatch(/-----END CERTIFICATE-----/)
-  expect(certContent).toBe(cert)
-
-  // 验证密钥基础格式
-  const keyContent = readFileSync(resolve(keyPath), 'utf-8')
-  expect(keyContent).toMatch(/-----BEGIN RSA PRIVATE KEY-----/)
-  expect(keyContent).toMatch(/-----END RSA PRIVATE KEY-----/)
-  expect(keyContent).toBe(key)
-}
+import { defineCertificate } from '../../src'
+import { CACHE_PATH, mkcertCheck } from '../common'
 
 describe('证书生成校验', () => {
   // 每次测试后清理生成的文件
@@ -52,6 +23,9 @@ describe('证书生成校验', () => {
     const keyPath = resolve(process.cwd(), 'b')
     await mkcertCheck({ validity: 1, force: true }, { cert: certPath, key: keyPath }) // INFO: 第一次测试强制生成以及生成一个有效期为一天的证书
     await mkcertCheck({ validity: 0 }, { cert: certPath, key: keyPath }) // INFO: 接上次测试，有效证书则不再生成
+    const newCertPath = resolve(CACHE_PATH, 'cert.pem')
+    await mkcertCheck({ validity: 0 }, { cert: newCertPath, key: keyPath }) // INFO: 接上次测试，选用不匹配的证书文件
+
     rmSync(certPath, { recursive: true, force: true })
     rmSync(keyPath, { recursive: true, force: true })
   })
