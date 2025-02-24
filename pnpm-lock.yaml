@@ -66,6 +66,28 @@ importers:
         specifier: ^3.3.1
         version: 3.3.1(typescript@5.7.3)
 
+  packages/core:
+    dependencies:
+      '@https-enable/mkcert':
+        specifier: workspace:*
+        version: link:../mkcert
+      '@https-enable/utils':
+        specifier: workspace:*
+        version: link:../utils
+    devDependencies:
+      '@https-enable/tsconfig':
+        specifier: workspace:*
+        version: link:../tsconfig
+      '@https-enable/types':
+        specifier: workspace:*
+        version: link:../types
+      '@types/node':
+        specifier: ^22.13.1
+        version: 22.13.1
+      unbuild:
+        specifier: ^3.3.1
+        version: 3.3.1(typescript@5.7.3)
+
   packages/logger:
     dependencies:
       '@https-enable/colors':
