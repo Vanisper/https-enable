@@ -11,7 +11,7 @@ export function verifyCertificateByTLS(options: Prettify<VerifyOptions & Certifi
     host: options.host,
     port: Number(options.port),
     secureContext,
-    rejectUnauthorized: options.rejectUnauthorized || false,
+    rejectUnauthorized: options.rejectUnauthorized,
   }
 
   const socket = tls.connect(tlsOptions, () => {
@@ -20,7 +20,7 @@ export function verifyCertificateByTLS(options: Prettify<VerifyOptions & Certifi
   })
 
   socket.on('error', (err) => {
-    logger.error('证书无效或连接错误', err)
+    logger.error(err.toString())
   })
 }
 
@@ -28,29 +28,26 @@ export function verifyCertificateValidityByTLS(options: Prettify<VerifyOptions>)
   const tlsOptions: tls.ConnectionOptions = {
     host: options.host,
     port: Number(options.port),
-    rejectUnauthorized: options.rejectUnauthorized || false,
+    rejectUnauthorized: options.rejectUnauthorized,
   }
 
   const socket = tls.connect(tlsOptions, () => {
     const cert = socket.getPeerCertificate()
-    if (cert.valid_from && cert.valid_to) {
-      const validFrom = new Date(cert.valid_from).getTime()
-      const validTo = new Date(cert.valid_to).getTime()
-      const now = Date.now()
 
-      if (now > validFrom && now < validTo)
-        logger.info('证书有效')
-      else
-        logger.warn('证书无效：不在有效期内')
-    }
-    else {
-      logger.warn('证书无效：无法获取证书有效期信息')
-    }
+    const validFrom = new Date(cert.valid_from).getTime()
+    const validTo = new Date(cert.valid_to).getTime()
+    const now = Date.now()
+
+    if (now > validFrom && now < validTo)
+      logger.info('证书有效')
+    else
+      logger.warn('证书无效：不在有效期内')
+
     socket.end()
   })
 
   socket.on('error', (err) => {
-    logger.error('连接错误', err)
+    logger.error(`${err}`)
   })
 }
 
