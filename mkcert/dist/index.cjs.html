@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/206</span>
+                <span class='fraction'>0/204</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/206</span>
+                <span class='fraction'>0/204</span>
             </div>
         
             
@@ -275,9 +275,7 @@
 <a name='L210'></a><a href='#L210'>210</a>
 <a name='L211'></a><a href='#L211'>211</a>
 <a name='L212'></a><a href='#L212'>212</a>
-<a name='L213'></a><a href='#L213'>213</a>
-<a name='L214'></a><a href='#L214'>214</a>
-<a name='L215'></a><a href='#L215'>215</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<a name='L213'></a><a href='#L213'>213</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -365,11 +363,8 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -481,6 +476,7 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -527,6 +523,7 @@
 <span class="cstat-no" title="statement not covered" >  ]</span>
 <span class="cstat-no" title="statement not covered" >});</span>
 &nbsp;
+<span class="cstat-no" title="statement not covered" >const defaultCertificateBasePath = path__default.join(process__default.cwd(), "cert");</span>
 <span class="cstat-no" title="statement not covered" >function processCertPath(certPath) {</span>
 <span class="cstat-no" title="statement not covered" >  if ("base" in certPath) {</span>
 <span class="cstat-no" title="statement not covered" >    const basePath = certPath.base;</span>
@@ -541,7 +538,7 @@
 <span class="cstat-no" title="statement not covered" >    };</span>
 <span class="cstat-no" title="statement not covered" >  }</span>
 <span class="cstat-no" title="statement not covered" >}</span>
-<span class="cstat-no" title="statement not covered" >function readCertificate(options = { base: path__default.join(process__default.cwd(), "cert") }) {</span>
+<span class="cstat-no" title="statement not covered" >function readCertificate(options = { base: defaultCertificateBasePath }) {</span>
 <span class="cstat-no" title="statement not covered" >  try {</span>
 <span class="cstat-no" title="statement not covered" >    const { keyPath, certPath } = processCertPath(options);</span>
 <span class="cstat-no" title="statement not covered" >    return {</span>
@@ -553,7 +550,7 @@
 <span class="cstat-no" title="statement not covered" >    return null;</span>
 <span class="cstat-no" title="statement not covered" >  }</span>
 <span class="cstat-no" title="statement not covered" >}</span>
-<span class="cstat-no" title="statement not covered" >function saveCertificate(cert, key, options = { base: path__default.join(process__default.cwd(), "cert") }) {</span>
+<span class="cstat-no" title="statement not covered" >function saveCertificate(cert, key, options = { base: defaultCertificateBasePath }) {</span>
 <span class="cstat-no" title="statement not covered" >  const { keyPath, certPath } = processCertPath(options);</span>
 <span class="cstat-no" title="statement not covered" >  const CERTS_DIR = path__default.dirname(certPath);</span>
 <span class="cstat-no" title="statement not covered" >  if (!fs__default.existsSync(CERTS_DIR)) {</span>
@@ -586,39 +583,35 @@
 <span class="cstat-no" title="statement not covered" >    host: options.host,</span>
 <span class="cstat-no" title="statement not covered" >    port: Number(options.port),</span>
 <span class="cstat-no" title="statement not covered" >    secureContext,</span>
-<span class="cstat-no" title="statement not covered" >    rejectUnauthorized: options.rejectUnauthorized || false</span>
+<span class="cstat-no" title="statement not covered" >    rejectUnauthorized: options.rejectUnauthorized</span>
 <span class="cstat-no" title="statement not covered" >  };</span>
 <span class="cstat-no" title="statement not covered" >  const socket = tls__default.connect(tlsOptions, () =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >    logger.info("\u8BC1\u4E66\u6709\u6548");</span>
 <span class="cstat-no" title="statement not covered" >    socket.end();</span>
 <span class="cstat-no" title="statement not covered" >  });</span>
 <span class="cstat-no" title="statement not covered" >  socket.on("error", (err) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    logger.error("\u8BC1\u4E66\u65E0\u6548\u6216\u8FDE\u63A5\u9519\u8BEF", err);</span>
+<span class="cstat-no" title="statement not covered" >    logger.error(err.toString());</span>
 <span class="cstat-no" title="statement not covered" >  });</span>
 <span class="cstat-no" title="statement not covered" >}</span>
 <span class="cstat-no" title="statement not covered" >function verifyCertificateValidityByTLS(options) {</span>
 <span class="cstat-no" title="statement not covered" >  const tlsOptions = {</span>
 <span class="cstat-no" title="statement not covered" >    host: options.host,</span>
 <span class="cstat-no" title="statement not covered" >    port: Number(options.port),</span>
-<span class="cstat-no" title="statement not covered" >    rejectUnauthorized: options.rejectUnauthorized || false</span>
+<span class="cstat-no" title="statement not covered" >    rejectUnauthorized: options.rejectUnauthorized</span>
 <span class="cstat-no" title="statement not covered" >  };</span>
 <span class="cstat-no" title="statement not covered" >  const socket = tls__default.connect(tlsOptions, () =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >    const cert = socket.getPeerCertificate();</span>
-<span class="cstat-no" title="statement not covered" >    if (cert.valid_from &amp;&amp; cert.valid_to) {</span>
-<span class="cstat-no" title="statement not covered" >      const validFrom = new Date(cert.valid_from).getTime();</span>
-<span class="cstat-no" title="statement not covered" >      const validTo = new Date(cert.valid_to).getTime();</span>
-<span class="cstat-no" title="statement not covered" >      const now = Date.now();</span>
-<span class="cstat-no" title="statement not covered" >      if (now &gt; validFrom &amp;&amp; now &lt; validTo)</span>
-<span class="cstat-no" title="statement not covered" >        logger.info("\u8BC1\u4E66\u6709\u6548");</span>
-<span class="cstat-no" title="statement not covered" >      else</span>
-<span class="cstat-no" title="statement not covered" >        logger.warn("\u8BC1\u4E66\u65E0\u6548\uFF1A\u4E0D\u5728\u6709\u6548\u671F\u5185");</span>
-<span class="cstat-no" title="statement not covered" >    } else {</span>
-<span class="cstat-no" title="statement not covered" >      logger.warn("\u8BC1\u4E66\u65E0\u6548\uFF1A\u65E0\u6CD5\u83B7\u53D6\u8BC1\u4E66\u6709\u6548\u671F\u4FE1\u606F");</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
+<span class="cstat-no" title="statement not covered" >    const validFrom = new Date(cert.valid_from).getTime();</span>
+<span class="cstat-no" title="statement not covered" >    const validTo = new Date(cert.valid_to).getTime();</span>
+<span class="cstat-no" title="statement not covered" >    const now = Date.now();</span>
+<span class="cstat-no" title="statement not covered" >    if (now &gt; validFrom &amp;&amp; now &lt; validTo)</span>
+<span class="cstat-no" title="statement not covered" >      logger.info("\u8BC1\u4E66\u6709\u6548");</span>
+<span class="cstat-no" title="statement not covered" >    else</span>
+<span class="cstat-no" title="statement not covered" >      logger.warn("\u8BC1\u4E66\u65E0\u6548\uFF1A\u4E0D\u5728\u6709\u6548\u671F\u5185");</span>
 <span class="cstat-no" title="statement not covered" >    socket.end();</span>
 <span class="cstat-no" title="statement not covered" >  });</span>
 <span class="cstat-no" title="statement not covered" >  socket.on("error", (err) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    logger.error("\u8FDE\u63A5\u9519\u8BEF", err);</span>
+<span class="cstat-no" title="statement not covered" >    logger.error(`${err}`);</span>
 <span class="cstat-no" title="statement not covered" >  });</span>
 <span class="cstat-no" title="statement not covered" >}</span>
 <span class="cstat-no" title="statement not covered" >async function verifyCertificate(keyPem, certPem) {</span>
@@ -697,6 +690,7 @@
 &nbsp;
 <span class="cstat-no" title="statement not covered" >exports.Logger = Logger__default;</span>
 <span class="cstat-no" title="statement not covered" >exports.createCertificate = createCertificate;</span>
+<span class="cstat-no" title="statement not covered" >exports.defaultCertificateBasePath = defaultCertificateBasePath;</span>
 <span class="cstat-no" title="statement not covered" >exports.defineCertificate = defineCertificate;</span>
 <span class="cstat-no" title="statement not covered" >exports.initSSLCertificate = initSSLCertificate;</span>
 <span class="cstat-no" title="statement not covered" >exports.processCertPath = processCertPath;</span>
@@ -712,7 +706,7 @@
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-02-23T03:10:43.931Z
+                at 2025-02-24T02:03:26.020Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
