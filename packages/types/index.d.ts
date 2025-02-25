@@ -65,3 +65,13 @@ export type Zip<
  * 将元组中的字面量转为大写
  */
 export type UppercaseUnion<T extends ReadonlyArray<string>> = Uppercase<T[number]>
+
+/**
+ * 将指定 Key 变为可选
+ */
+export type MakeOptional<T, K extends keyof T> = Prettify<Omit<T, K> & Partial<Pick<T, K>>>
+
+/**
+ * 只将将指定 Key 变为必选
+ */
+export type MakeOnlyRequired<T, K extends keyof T> = Prettify<Pick<T, K> & Partial<Omit<T, K>>>
