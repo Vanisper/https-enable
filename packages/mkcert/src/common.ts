@@ -59,7 +59,7 @@ export function saveCertificate(cert: string, key: string, options: CertificateP
   return { keyPath, certPath }
 }
 
-export async function createCertificate(_options: CreateOptions, pathOptions?: CertificatePath): Promise<Certificate> {
+export async function createCertificate(_options: CreateOptions, pathOptions?: CertificatePath, isCache = true): Promise<Certificate> {
   const { force, ...options } = _options
   return new Promise((resolve, reject) => {
     createCA(options)
@@ -70,7 +70,7 @@ export async function createCertificate(_options: CreateOptions, pathOptions?: C
           validity: options.validity,
         })
           .then((cert) => {
-            saveCertificate(cert.cert, cert.key, pathOptions)
+            isCache && saveCertificate(cert.cert, cert.key, pathOptions)
             resolve(cert)
           })
           .catch(reject)
