@@ -14,8 +14,8 @@ const defaultCA = {
 }
 
 export class CertificateManager extends EventEmitter<CertificateEvents> {
-  private options: Prettify<CreateOptions & { cache?: boolean }>
-  private pathOptions: CertificatePath
+  protected options: Prettify<CreateOptions & { cache?: boolean }>
+  protected pathOptions: CertificatePath
   public currentCert: Certificate | null
 
   constructor(options: CertificateManagerOptions) {

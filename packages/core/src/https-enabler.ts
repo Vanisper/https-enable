@@ -11,7 +11,7 @@ export class HttpsEnabler<
   Middleware = MiddlewareType,
 > extends EventEmitter<HttpsEnablerEvents> {
   public adapter: HttpsAdapter<App, Middleware>
-  private options: Prettify<ServerOptions &
+  protected options: Prettify<ServerOptions &
     {
       /**
        * http 301 重定向至 https
@@ -19,9 +19,9 @@ export class HttpsEnabler<
       redirect?: boolean
     }>
 
-  private certificateOptions: CertificateManagerOptions
+  protected certificateOptions: CertificateManagerOptions
 
-  private certManager: CertificateManager
+  protected certManager: CertificateManager
 
   constructor(config: {
     adapter: typeof HttpsEnabler.prototype.adapter
