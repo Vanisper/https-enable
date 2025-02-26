@@ -1,7 +1,6 @@
 {
   "name": "@https-enable/colors",
   "version": "0.0.0",
-  "private": true,
   "license": "MIT",
   "exports": {
     ".": {
@@ -12,9 +11,17 @@
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "scripts": {
     "build": "unbuild",
     "dev": "unbuild --stub",
+    "release": "npm run build && bumpp",
     "prepublishOnly": "npm run build"
   },
   "devDependencies": {

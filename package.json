@@ -23,6 +23,7 @@
     "@https-enable/tsconfig": "workspace:*",
     "@vitest/coverage-v8": "3.0.6",
     "axios": "^1.7.9",
+    "bumpp": "^10.0.3",
     "commitizen": "^4.3.1",
     "cz-git": "^1.11.0",
     "eslint": "^9.20.0",
