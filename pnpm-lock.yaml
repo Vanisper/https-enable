@@ -51,6 +51,18 @@ importers:
         specifier: ^3.0.6
         version: 3.0.6(@types/debug@4.1.12)(@types/node@22.13.1)(jiti@2.4.2)(yaml@2.7.0)
 
+  examples/express:
+    dependencies:
+      '@https-enable/adapter-express':
+        specifier: workspace:*
+        version: link:../../packages/adapters/express
+      '@https-enable/core':
+        specifier: workspace:*
+        version: link:../../packages/core
+      express:
+        specifier: ^4.21.2
+        version: 4.21.2
+
   packages/adapters/express:
     dependencies:
       '@https-enable/core':
