@@ -1,8 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1740604393322" clover="3.2.0">
-  <project timestamp="1740604393322" name="All files">
-    <metrics statements="4397" coveredstatements="647" conditionals="198" coveredconditionals="131" methods="142" coveredmethods="83" elements="4737" coveredelements="861" complexity="0" loc="4397" ncloc="4397" packages="17" files="69" classes="69"/>
-    <package name="adapters.express.dist">
+<coverage generated="1740608691981" clover="3.2.0">
+  <project timestamp="1740608691981" name="All files">
+    <metrics statements="4418" coveredstatements="645" conditionals="203" coveredconditionals="134" methods="143" coveredmethods="83" elements="4764" coveredelements="862" complexity="0" loc="4418" ncloc="4418" packages="18" files="70" classes="70"/>
+    <package name="examples.express">
+      <metrics statements="25" coveredstatements="0" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="0"/>
+      <file name="index.js" path="/home/runner/work/https-enable/https-enable/examples/express/index.js">
+        <metrics statements="25" coveredstatements="0" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="1" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="2" count="0" type="stmt"/>
+        <line num="3" count="0" type="stmt"/>
+        <line num="4" count="0" type="stmt"/>
+        <line num="6" count="0" type="stmt"/>
+        <line num="7" count="0" type="stmt"/>
+        <line num="9" count="0" type="stmt"/>
+        <line num="11" count="0" type="stmt"/>
+        <line num="12" count="0" type="stmt"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="14" count="0" type="stmt"/>
+        <line num="16" count="0" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="18" count="0" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="20" count="0" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="23" count="0" type="stmt"/>
+        <line num="24" count="0" type="stmt"/>
+        <line num="26" count="0" type="stmt"/>
+        <line num="27" count="0" type="stmt"/>
+        <line num="28" count="0" type="stmt"/>
+        <line num="30" count="0" type="stmt"/>
+        <line num="31" count="0" type="stmt"/>
+        <line num="32" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="packages.adapters.express.dist">
       <metrics statements="34" coveredstatements="0" conditionals="3" coveredconditionals="1" methods="3" coveredmethods="1"/>
       <file name="index.cjs" path="/home/runner/work/https-enable/https-enable/packages/adapters/express/dist/index.cjs">
         <metrics statements="18" coveredstatements="0" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="0"/>
@@ -48,7 +79,7 @@
         <line num="17" count="0" type="stmt"/>
       </file>
     </package>
-    <package name="adapters.express.src">
+    <package name="packages.adapters.express.src">
       <metrics statements="18" coveredstatements="0" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
       <file name="index.ts" path="/home/runner/work/https-enable/https-enable/packages/adapters/express/src/index.ts">
         <metrics statements="18" coveredstatements="0" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
@@ -72,7 +103,7 @@
         <line num="25" count="0" type="stmt"/>
       </file>
     </package>
-    <package name="colors.dist">
+    <package name="packages.colors.dist">
       <metrics statements="202" coveredstatements="92" conditionals="12" coveredconditionals="9" methods="7" coveredmethods="5"/>
       <file name="index.cjs" path="/home/runner/work/https-enable/https-enable/packages/colors/dist/index.cjs">
         <metrics statements="104" coveredstatements="0" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="0"/>
@@ -286,7 +317,7 @@
         <line num="101" count="38" type="stmt"/>
       </file>
     </package>
-    <package name="colors.src">
+    <package name="packages.colors.src">
       <metrics statements="114" coveredstatements="0" conditionals="4" coveredconditionals="3" methods="4" coveredmethods="3"/>
       <file name="common.ts" path="/home/runner/work/https-enable/https-enable/packages/colors/src/common.ts">
         <metrics statements="11" coveredstatements="0" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="0"/>
@@ -415,7 +446,7 @@
         <line num="104" count="0" type="stmt"/>
       </file>
     </package>
-    <package name="core.dist">
+    <package name="packages.core.dist">
       <metrics statements="398" coveredstatements="0" conditionals="3" coveredconditionals="1" methods="3" coveredmethods="1"/>
       <file name="index.cjs" path="/home/runner/work/https-enable/https-enable/packages/core/dist/index.cjs">
         <metrics statements="204" coveredstatements="0" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="0"/>
@@ -825,7 +856,7 @@
         <line num="198" count="0" type="stmt"/>
       </file>
     </package>
-    <package name="core.src">
+    <package name="packages.core.src">
       <metrics statements="184" coveredstatements="0" conditionals="6" coveredconditionals="5" methods="6" coveredmethods="5"/>
       <file name="certificate-manager.ts" path="/home/runner/work/https-enable/https-enable/packages/core/src/certificate-manager.ts">
         <metrics statements="59" coveredstatements="0" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
@@ -1030,7 +1061,7 @@
         <line num="110" count="0" type="stmt"/>
       </file>
     </package>
-    <package name="logger.dist">
+    <package name="packages.logger.dist">
       <metrics statements="1380" coveredstatements="332" conditionals="84" coveredconditionals="52" methods="53" coveredmethods="37"/>
       <file name="index.cjs" path="/home/runner/work/https-enable/https-enable/packages/logger/dist/index.cjs">
         <metrics statements="696" coveredstatements="0" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="0"/>
@@ -2422,7 +2453,7 @@
         <line num="712" count="2" type="stmt"/>
       </file>
     </package>
-    <package name="logger.src">
+    <package name="packages.logger.src">
       <metrics statements="91" coveredstatements="0" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
       <file name="index.ts" path="/home/runner/work/https-enable/https-enable/packages/logger/src/index.ts">
         <metrics statements="91" coveredstatements="0" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
@@ -2519,7 +2550,7 @@
         <line num="139" count="0" type="stmt"/>
       </file>
     </package>
-    <package name="logger.src.format">
+    <package name="packages.logger.src.format">
       <metrics statements="90" coveredstatements="0" conditionals="3" coveredconditionals="2" methods="3" coveredmethods="2"/>
       <file name="format.ts" path="/home/runner/work/https-enable/https-enable/packages/logger/src/format/format.ts">
         <metrics statements="25" coveredstatements="0" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
@@ -2621,7 +2652,7 @@
         <line num="11" count="0" type="stmt"/>
       </file>
     </package>
-    <package name="logger.src.format.plugins">
+    <package name="packages.logger.src.format.plugins">
       <metrics statements="385" coveredstatements="0" conditionals="17" coveredconditionals="7" methods="17" coveredmethods="7"/>
       <file name="align.ts" path="/home/runner/work/https-enable/https-enable/packages/logger/src/format/plugins/align.ts">
         <metrics statements="5" coveredstatements="0" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="0"/>
@@ -3060,7 +3091,7 @@
         <line num="44" count="0" type="stmt"/>
       </file>
     </package>
-    <package name="logger.src.transports">
+    <package name="packages.logger.src.transports">
       <metrics statements="93" coveredstatements="0" conditionals="4" coveredconditionals="3" methods="4" coveredmethods="3"/>
       <file name="base.ts" path="/home/runner/work/https-enable/https-enable/packages/logger/src/transports/base.ts">
         <metrics statements="28" coveredstatements="0" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
@@ -3168,7 +3199,7 @@
         <line num="61" count="0" type="stmt"/>
       </file>
     </package>
-    <package name="logger.src.triple-beam">
+    <package name="packages.logger.src.triple-beam">
       <metrics statements="9" coveredstatements="0" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="0"/>
       <file name="index.ts" path="/home/runner/work/https-enable/https-enable/packages/logger/src/triple-beam/index.ts">
         <metrics statements="9" coveredstatements="0" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="0"/>
@@ -3183,7 +3214,7 @@
         <line num="16" count="0" type="stmt"/>
       </file>
     </package>
-    <package name="logger.src.triple-beam.config">
+    <package name="packages.logger.src.triple-beam.config">
       <metrics statements="74" coveredstatements="0" conditionals="4" coveredconditionals="3" methods="4" coveredmethods="3"/>
       <file name="cli.ts" path="/home/runner/work/https-enable/https-enable/packages/logger/src/triple-beam/config/cli.ts">
         <metrics statements="27" coveredstatements="0" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
@@ -3272,10 +3303,10 @@
         <line num="26" count="0" type="stmt"/>
       </file>
     </package>
-    <package name="mkcert.dist">
-      <metrics statements="450" coveredstatements="0" conditionals="3" coveredconditionals="0" methods="3" coveredmethods="0"/>
+    <package name="packages.mkcert.dist">
+      <metrics statements="448" coveredstatements="0" conditionals="3" coveredconditionals="0" methods="3" coveredmethods="0"/>
       <file name="index.cjs" path="/home/runner/work/https-enable/https-enable/packages/mkcert/dist/index.cjs">
-        <metrics statements="205" coveredstatements="0" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <metrics statements="204" coveredstatements="0" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="1" count="0" type="cond" truecount="0" falsecount="1"/>
         <line num="3" count="0" type="stmt"/>
         <line num="4" count="0" type="stmt"/>
@@ -3359,7 +3390,7 @@
         <line num="86" count="0" type="stmt"/>
         <line num="87" count="0" type="stmt"/>
         <line num="88" count="0" type="stmt"/>
-        <line num="89" count="0" type="stmt"/>
+        <line num="90" count="0" type="stmt"/>
         <line num="91" count="0" type="stmt"/>
         <line num="92" count="0" type="stmt"/>
         <line num="93" count="0" type="stmt"/>
@@ -3431,7 +3462,7 @@
         <line num="159" count="0" type="stmt"/>
         <line num="160" count="0" type="stmt"/>
         <line num="161" count="0" type="stmt"/>
-        <line num="162" count="0" type="stmt"/>
+        <line num="163" count="0" type="stmt"/>
         <line num="164" count="0" type="stmt"/>
         <line num="165" count="0" type="stmt"/>
         <line num="166" count="0" type="stmt"/>
@@ -3468,7 +3499,7 @@
         <line num="197" count="0" type="stmt"/>
         <line num="198" count="0" type="stmt"/>
         <line num="199" count="0" type="stmt"/>
-        <line num="200" count="0" type="stmt"/>
+        <line num="201" count="0" type="stmt"/>
         <line num="202" count="0" type="stmt"/>
         <line num="203" count="0" type="stmt"/>
         <line num="204" count="0" type="stmt"/>
@@ -3480,7 +3511,6 @@
         <line num="210" count="0" type="stmt"/>
         <line num="211" count="0" type="stmt"/>
         <line num="212" count="0" type="stmt"/>
-        <line num="213" count="0" type="stmt"/>
       </file>
       <file name="index.d.mts" path="/home/runner/work/https-enable/https-enable/packages/mkcert/dist/index.d.mts">
         <metrics statements="61" coveredstatements="0" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="0"/>
@@ -3547,7 +3577,7 @@
         <line num="61" count="0" type="stmt"/>
       </file>
       <file name="index.mjs" path="/home/runner/work/https-enable/https-enable/packages/mkcert/dist/index.mjs">
-        <metrics statements="184" coveredstatements="0" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <metrics statements="183" coveredstatements="0" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="1" count="0" type="cond" truecount="0" falsecount="1"/>
         <line num="2" count="0" type="stmt"/>
         <line num="3" count="0" type="stmt"/>
@@ -3622,7 +3652,7 @@
         <line num="74" count="0" type="stmt"/>
         <line num="75" count="0" type="stmt"/>
         <line num="76" count="0" type="stmt"/>
-        <line num="77" count="0" type="stmt"/>
+        <line num="78" count="0" type="stmt"/>
         <line num="79" count="0" type="stmt"/>
         <line num="80" count="0" type="stmt"/>
         <line num="81" count="0" type="stmt"/>
@@ -3694,7 +3724,7 @@
         <line num="147" count="0" type="stmt"/>
         <line num="148" count="0" type="stmt"/>
         <line num="149" count="0" type="stmt"/>
-        <line num="150" count="0" type="stmt"/>
+        <line num="151" count="0" type="stmt"/>
         <line num="152" count="0" type="stmt"/>
         <line num="153" count="0" type="stmt"/>
         <line num="154" count="0" type="stmt"/>
@@ -3731,13 +3761,12 @@
         <line num="185" count="0" type="stmt"/>
         <line num="186" count="0" type="stmt"/>
         <line num="187" count="0" type="stmt"/>
-        <line num="188" count="0" type="stmt"/>
       </file>
     </package>
-    <package name="mkcert.src">
-      <metrics statements="205" coveredstatements="205" conditionals="42" coveredconditionals="39" methods="10" coveredmethods="10"/>
+    <package name="packages.mkcert.src">
+      <metrics statements="203" coveredstatements="203" conditionals="46" coveredconditionals="42" methods="10" coveredmethods="10"/>
       <file name="common.ts" path="/home/runner/work/https-enable/https-enable/packages/mkcert/src/common.ts">
-        <metrics statements="64" coveredstatements="64" conditionals="13" coveredconditionals="11" methods="4" coveredmethods="4"/>
+        <metrics statements="62" coveredstatements="62" conditionals="17" coveredconditionals="14" methods="4" coveredmethods="4"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
         <line num="4" count="1" type="stmt"/>
@@ -3745,63 +3774,61 @@
         <line num="7" count="1" type="stmt"/>
         <line num="9" count="1" type="stmt"/>
         <line num="11" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="12" count="19" type="cond" truecount="1" falsecount="0"/>
-        <line num="14" count="11" type="stmt"/>
-        <line num="15" count="11" type="stmt"/>
-        <line num="16" count="11" type="stmt"/>
-        <line num="17" count="11" type="stmt"/>
-        <line num="18" count="11" type="stmt"/>
-        <line num="19" count="11" type="cond" truecount="1" falsecount="0"/>
-        <line num="20" count="8" type="stmt"/>
-        <line num="22" count="8" type="stmt"/>
-        <line num="23" count="8" type="stmt"/>
-        <line num="24" count="8" type="stmt"/>
-        <line num="25" count="8" type="stmt"/>
-        <line num="26" count="8" type="stmt"/>
-        <line num="27" count="19" type="stmt"/>
-        <line num="29" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="12" count="19" type="cond" truecount="5" falsecount="0"/>
+        <line num="13" count="8" type="stmt"/>
+        <line num="14" count="8" type="stmt"/>
+        <line num="15" count="8" type="stmt"/>
+        <line num="16" count="8" type="stmt"/>
+        <line num="17" count="8" type="stmt"/>
+        <line num="19" count="19" type="cond" truecount="0" falsecount="1"/>
+        <line num="20" count="19" type="stmt"/>
+        <line num="21" count="19" type="stmt"/>
+        <line num="22" count="19" type="stmt"/>
+        <line num="23" count="19" type="stmt"/>
+        <line num="24" count="19" type="stmt"/>
+        <line num="26" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="27" count="7" type="stmt"/>
+        <line num="28" count="7" type="stmt"/>
+        <line num="29" count="7" type="stmt"/>
         <line num="30" count="7" type="stmt"/>
         <line num="31" count="7" type="stmt"/>
         <line num="32" count="7" type="stmt"/>
-        <line num="33" count="7" type="stmt"/>
-        <line num="34" count="7" type="stmt"/>
-        <line num="35" count="7" type="stmt"/>
-        <line num="36" count="7" type="cond" truecount="1" falsecount="0"/>
+        <line num="33" count="7" type="cond" truecount="1" falsecount="0"/>
+        <line num="34" count="4" type="stmt"/>
+        <line num="35" count="4" type="stmt"/>
+        <line num="36" count="4" type="stmt"/>
         <line num="37" count="4" type="stmt"/>
-        <line num="38" count="4" type="stmt"/>
-        <line num="39" count="4" type="stmt"/>
-        <line num="40" count="4" type="stmt"/>
-        <line num="41" count="7" type="stmt"/>
-        <line num="46" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="47" count="6" type="stmt"/>
-        <line num="48" count="6" type="stmt"/>
-        <line num="50" count="6" type="cond" truecount="1" falsecount="0"/>
-        <line num="51" count="2" type="stmt"/>
-        <line num="52" count="2" type="stmt"/>
+        <line num="38" count="7" type="stmt"/>
+        <line num="43" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="44" count="6" type="stmt"/>
+        <line num="45" count="6" type="stmt"/>
+        <line num="47" count="6" type="cond" truecount="1" falsecount="0"/>
+        <line num="48" count="2" type="stmt"/>
+        <line num="49" count="2" type="stmt"/>
+        <line num="51" count="6" type="stmt"/>
+        <line num="52" count="6" type="stmt"/>
         <line num="54" count="6" type="stmt"/>
-        <line num="55" count="6" type="stmt"/>
+        <line num="56" count="6" type="stmt"/>
         <line num="57" count="6" type="stmt"/>
-        <line num="59" count="6" type="stmt"/>
+        <line num="59" count="6" type="cond" truecount="1" falsecount="0"/>
         <line num="60" count="6" type="stmt"/>
-        <line num="62" count="6" type="cond" truecount="1" falsecount="0"/>
-        <line num="63" count="6" type="stmt"/>
-        <line num="64" count="6" type="cond" truecount="1" falsecount="0"/>
+        <line num="61" count="6" type="cond" truecount="1" falsecount="0"/>
+        <line num="62" count="6" type="stmt"/>
+        <line num="63" count="6" type="cond" truecount="1" falsecount="0"/>
+        <line num="64" count="6" type="stmt"/>
         <line num="65" count="6" type="stmt"/>
-        <line num="66" count="6" type="cond" truecount="1" falsecount="0"/>
+        <line num="66" count="6" type="cond" truecount="0" falsecount="2"/>
         <line num="67" count="6" type="stmt"/>
         <line num="68" count="6" type="stmt"/>
-        <line num="69" count="6" type="cond" truecount="0" falsecount="2"/>
+        <line num="69" count="6" type="cond" truecount="1" falsecount="0"/>
         <line num="70" count="6" type="stmt"/>
         <line num="71" count="6" type="stmt"/>
-        <line num="72" count="6" type="cond" truecount="1" falsecount="0"/>
+        <line num="72" count="6" type="stmt"/>
         <line num="73" count="6" type="stmt"/>
         <line num="74" count="6" type="stmt"/>
         <line num="75" count="6" type="stmt"/>
         <line num="76" count="6" type="stmt"/>
         <line num="77" count="6" type="stmt"/>
-        <line num="78" count="6" type="stmt"/>
-        <line num="79" count="6" type="stmt"/>
-        <line num="80" count="6" type="stmt"/>
       </file>
       <file name="index.ts" path="/home/runner/work/https-enable/https-enable/packages/mkcert/src/index.ts">
         <metrics statements="44" coveredstatements="44" conditionals="15" coveredconditionals="15" methods="2" coveredmethods="2"/>
@@ -3954,7 +3981,7 @@
         <line num="103" count="3" type="stmt"/>
       </file>
     </package>
-    <package name="utils.dist">
+    <package name="packages.utils.dist">
       <metrics statements="429" coveredstatements="18" conditionals="4" coveredconditionals="2" methods="16" coveredmethods="2"/>
       <file name="index.cjs" path="/home/runner/work/https-enable/https-enable/packages/utils/dist/index.cjs">
         <metrics statements="226" coveredstatements="0" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="0"/>
@@ -4395,7 +4422,7 @@
         <line num="208" count="14" type="stmt"/>
       </file>
     </package>
-    <package name="utils.src">
+    <package name="packages.utils.src">
       <metrics statements="241" coveredstatements="0" conditionals="6" coveredconditionals="2" methods="6" coveredmethods="2"/>
       <file name="common.ts" path="/home/runner/work/https-enable/https-enable/packages/utils/src/common.ts">
         <metrics statements="6" coveredstatements="0" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="0"/>
