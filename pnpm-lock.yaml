@@ -114,9 +114,6 @@ importers:
       '@https-enable/mkcert':
         specifier: workspace:*
         version: link:../mkcert
-      '@https-enable/utils':
-        specifier: workspace:*
-        version: link:../utils
     devDependencies:
       '@https-enable/tsconfig':
         specifier: workspace:*
