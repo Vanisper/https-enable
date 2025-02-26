@@ -1,0 +1,35 @@
+{
+  "name": "@https-enable/adapter-express",
+  "type": "module",
+  "version": "0.0.0",
+  "private": true,
+  "license": "MIT",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "unbuild",
+    "dev": "unbuild --stub",
+    "prepublishOnly": "npm run build"
+  },
+  "peerDependencies": {
+    "@https-enable/core": "workspace:*",
+    "express": "*"
+  },
+  "dependencies": {
+    "@https-enable/mkcert": "workspace:*"
+  },
+  "devDependencies": {
+    "@https-enable/tsconfig": "workspace:*",
+    "@https-enable/types": "workspace:*",
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.13.1",
+    "unbuild": "^3.3.1"
+  }
+}
