@@ -9,5 +9,5 @@ export default defineBuildConfig({
     inlineDependencies: false,
   },
   failOnWarn: false,
-  externals: [],
+  externals: ['@https-enable/types'],
 })
