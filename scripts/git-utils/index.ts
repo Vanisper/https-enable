@@ -31,15 +31,14 @@ export async function squashLastNCommits(n: number, options?: SquashOptions) {
   const commitHashes = await getCommitHashes(actualSquashCount)
   const tags = await getLocalUnpushedTags(commitHashes)
 
-  // 执行合并并打标签
-  const squashSuccessful = await performSquash(actualSquashCount, options?.message, options?.filter)
+  const lastCommitHash = await performSquash(actualSquashCount, options?.message, options?.filter)
 
-  if (squashSuccessful) {
+  if (lastCommitHash) {
     // 为合并后的提交打上标签
-    await addTagsToCommit(commitHashes, tags)
+    await addTagsToCommit(lastCommitHash, commitHashes, tags)
   }
 
-  return squashSuccessful
+  return lastCommitHash
 }
 
 // 以下为内部工具函数
@@ -113,11 +112,10 @@ async function performSquash(count: number, message?: string, filter?: SquashOpt
     await x('git', ['reset', '--soft', `HEAD~${count}`], execOptions)
 
     // 创建新提交
-    await x('git', [
-      'commit',
-      ...buildMessageArgs(commitMessage),
-    ], execOptions)
-    return true
+    await x('git', ['commit', ...buildMessageArgs(commitMessage)], execOptions)
+    // 获取最后的合并提交哈希
+    const lastCommitHash = await x('git', ['rev-parse', 'HEAD'], execOptions)
+    return lastCommitHash.stdout.trim()
   }
   catch (error) {
     throw new Error(`Squash failed: ${error instanceof Error ? error.message : error}`)
@@ -194,10 +192,8 @@ async function getLocalUnpushedTags(commits: string[] = []): Promise<Record<stri
 }
 
 // 为合并后的提交添加标签
-async function addTagsToCommit(commits: string[], tagsForCommits: Record<string, string[]>): Promise<void> {
-  const lastCommit = commits[commits.length - 1] // 获取最后一个合并提交的哈希值
-
-  if (!lastCommit)
+async function addTagsToCommit(lastCommitHash: string, commits: string[], tagsForCommits: Record<string, string[]>): Promise<void> {
+  if (!lastCommitHash)
     return
 
   for (const commit of commits) {
@@ -206,7 +202,8 @@ async function addTagsToCommit(commits: string[], tagsForCommits: Record<string,
     await deleteOldTags(tags)
     for (const tag of tags) {
       try {
-        await x('git', ['tag', tag, lastCommit], execOptions) // 为最后的合并提交打标签
+        console.log(`Adding tag '${tag}' to the merged commit ${lastCommitHash}`)
+        await x('git', ['tag', tag, lastCommitHash], execOptions)
       }
       catch (error) {
         console.error(`Failed to tag commit ${commit} with tag ${tag}: ${error}`)
