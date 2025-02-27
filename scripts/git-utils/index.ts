@@ -12,7 +12,7 @@ interface SquashOptions {
   force?: boolean
   filter?: (line: string) => unknown
 }
-// chore: release
+
 /**
  * 合并本地最新的 N 个 Git 提交
  * @param n 需要合并的提交数量
@@ -23,11 +23,23 @@ interface SquashOptions {
 export async function squashLastNCommits(n: number, options?: SquashOptions) {
   validateInput(n)
   checkGitRepository()
-  // checkWorkingDirectoryClean();
 
   const commitCount = await getUnpushedCommitCount()
   const actualSquashCount = calculateActualSquashCount(n, commitCount, options?.force)
-  return await performSquash(actualSquashCount, options?.message, options?.filter)
+
+  // 获取需要合并的提交的标签
+  const commitHashes = await getCommitHashes(actualSquashCount)
+  const tags = await getLocalUnpushedTags(commitHashes)
+
+  // 执行合并并打标签
+  const squashSuccessful = await performSquash(actualSquashCount, options?.message, options?.filter)
+
+  if (squashSuccessful) {
+    // 为合并后的提交打上标签
+    await addTagsToCommit(commitHashes, tags)
+  }
+
+  return squashSuccessful
 }
 
 // 以下为内部工具函数
@@ -50,7 +62,6 @@ async function checkGitRepository(): Promise<void> {
 async function getUnpushedCommitCount() {
   try {
     const currentBranch = (await x('git', ['rev-parse', '--abbrev-ref', 'HEAD'], execOptions)).stdout.trim()
-
     const upstreamExists = (await x(
       'git',
       ['rev-parse', '--abbrev-ref', `${currentBranch}@{u}`],
@@ -64,14 +75,8 @@ async function getUnpushedCommitCount() {
       )
     }
 
-    try {
-      const result = await x('git', ['rev-list', '--count', `${currentBranch}@{u}..HEAD`], execOptions)
-
-      return Number.parseInt(result.stdout.trim(), 10)
-    }
-    catch {
-      throw new Error('Failed to count local commits')
-    }
+    const result = await x('git', ['rev-list', '--count', `${currentBranch}@{u}..HEAD`], execOptions)
+    return Number.parseInt(result.stdout.trim(), 10)
   }
   catch (error) {
     if (error instanceof Error) {
@@ -86,8 +91,6 @@ function calculateActualSquashCount(
   available: number,
   force = false,
 ): number {
-  // if (available === 0) throw new Error('No commits to squash');
-
   const actual = Math.min(requested, available)
   if (!force && actual < requested) {
     throw new Error(
@@ -104,15 +107,12 @@ async function performSquash(count: number, message?: string, filter?: SquashOpt
   }
 
   try {
-    // 生成默认提交信息
-    const commitMessage = message
-      || `${await getOriginalCommitMessages(count, filter)}`
+    const commitMessage = message || `${await getOriginalCommitMessages(count, filter)}`
 
     // 回退 HEAD 但保留工作目录
     await x('git', ['reset', '--soft', `HEAD~${count}`], execOptions)
 
     // 创建新提交
-    // 使用参数数组格式避免 shell 解析问题
     await x('git', [
       'commit',
       ...buildMessageArgs(commitMessage),
@@ -136,31 +136,20 @@ async function getOriginalCommitMessages(count: number, filter = (line: string) 
   )
 
   const msgList = res.stdout.split('\n')
-
-  const temp = msgList.filter(item => item)
-
   const msg = msgList.filter(filter).join('\n')
 
-  console.log(temp, count, JSON.stringify(msg))
   return msg
 }
 
-// 构建跨平台兼容的提交信息参数
 function buildMessageArgs(message: string): string[] {
-  // 方法 1：直接传递（适用于简单消息）
-  // return ['-m', message];
-
-  // 方法 2：使用临时文件（推荐用于复杂格式）
   const tempFile = createTempFile(message)
   return ['-F', tempFile]
 }
 
-// 创建临时文件处理复杂消息
 function createTempFile(content: string): string {
   const tempPath = path.join(os.tmpdir(), `git-commit-${Date.now()}.txt`)
   fs.writeFileSync(tempPath, content, 'utf-8')
 
-  // 注册退出清理钩子
   process.once('exit', () => {
     try {
       fs.unlinkSync(tempPath)
@@ -168,6 +157,60 @@ function createTempFile(content: string): string {
     catch { }
   })
   return tempPath
+}
+
+// 获取需要合并的提交的 Hash 值
+async function getCommitHashes(count: number): Promise<string[]> {
+  const result = await x('git', ['log', '--format=%H', `-n ${count}`, 'HEAD'], execOptions)
+  return result.stdout.split('\n').filter(hash => hash)
+}
+
+// 获取本地未推送到远程的标签
+async function getLocalUnpushedTags(commits: string[] = []): Promise<Record<string, string[]>> {
+  const tagsForCommits: Record<string, string[]> = {}
+
+  // 获取本地所有标签
+  const localTagsResult = await x('git', ['tag', '-l'], execOptions)
+  const localTags = new Set(localTagsResult.stdout.split('\n').filter(tag => tag))
+
+  // 获取远程所有标签
+  const remoteTagsResult = await x('git', ['ls-remote', '--tags', '--refs'], execOptions)
+  const remoteTags = new Set(remoteTagsResult.stdout.split('\n').map(line => line.split('\t')[1]?.replace('refs/tags/', '')).filter(tag => tag))
+
+  // 找出那些存在于本地但没有推送到远程的标签
+  const unpushedLocalTags = [...localTags].filter(tag => !remoteTags.has(tag))
+
+  // 为每个提交检查它是否有未推送的标签
+  for (const commit of commits) {
+    const result = await x('git', ['tag', '--points-at', commit], execOptions)
+    const tags = result.stdout.split('\n').filter(tag => tag)
+
+    // 过滤出那些本地未推送的标签
+    const unpushedTags = tags.filter(tag => unpushedLocalTags.includes(tag))
+    tagsForCommits[commit] = unpushedTags
+  }
+
+  return tagsForCommits
+}
+
+// 为合并后的提交添加标签
+async function addTagsToCommit(commits: string[], tagsForCommits: Record<string, string[]>): Promise<void> {
+  const lastCommit = commits[commits.length - 1] // 获取最后一个合并提交的哈希值
+
+  if (!lastCommit)
+    return
+
+  for (const commit of commits) {
+    const tags = tagsForCommits[commit] || []
+    for (const tag of tags) {
+      try {
+        await x('git', ['tag', tag, lastCommit], execOptions) // 为最后的合并提交打标签
+      }
+      catch (error) {
+        console.error(`Failed to tag commit ${commit} with tag ${tag}: ${error}`)
+      }
+    }
+  }
 }
 
 async function checkWorkingDirectoryClean(): Promise<void> {
