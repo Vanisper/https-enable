@@ -1,7 +1,7 @@
 {
   "name": "https-enable",
   "type": "module",
-  "version": "0.0.0",
+  "private": true,
   "sideEffects": false,
   "scripts": {
     "preinstall": "npx only-allow pnpm",
