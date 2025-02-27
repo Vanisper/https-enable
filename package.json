@@ -15,7 +15,9 @@
     "test": "vitest",
     "test:mkcert": "npm run test -- --project @https-enable/mkcert",
     "test:coverage": "npm run test -- --coverage",
-    "release": "npm run build && bumpp -r"
+    "changeset": "changeset",
+    "release": "npm run build && pnpm release:only",
+    "release:only": "changeset publish"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^4.1.1",
