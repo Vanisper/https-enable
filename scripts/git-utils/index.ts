@@ -202,6 +202,8 @@ async function addTagsToCommit(commits: string[], tagsForCommits: Record<string,
 
   for (const commit of commits) {
     const tags = tagsForCommits[commit] || []
+    // 删除旧的标签
+    await deleteOldTags(tags)
     for (const tag of tags) {
       try {
         await x('git', ['tag', tag, lastCommit], execOptions) // 为最后的合并提交打标签
@@ -210,6 +212,14 @@ async function addTagsToCommit(commits: string[], tagsForCommits: Record<string,
         console.error(`Failed to tag commit ${commit} with tag ${tag}: ${error}`)
       }
     }
+  }
+}
+
+// 删除旧的标签
+async function deleteOldTags(tags: string[]) {
+  for (const tag of tags) {
+    console.log(`Deleting tag '${tag}'`)
+    await x('git', ['tag', '-d', tag], execOptions)
   }
 }
 
