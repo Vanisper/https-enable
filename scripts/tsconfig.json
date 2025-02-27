@@ -1,0 +1,5 @@
+{
+  "extends": "@https-enable/tsconfig/tsconfig.base.json",
+  "include": ["./*/**.ts", "./*.ts"],
+  "exclude": ["node_modules"]
+}
