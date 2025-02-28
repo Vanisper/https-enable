@@ -1,12 +1,18 @@
 import type { VersionBumpResults } from 'bumpp'
+import path from 'node:path'
 import process from 'node:process'
 import chalk from 'chalk'
 import enquirer from 'enquirer'
+import { x } from 'tinyexec'
+import { generateChangelog } from './changelog'
 import { squashLastNCommits } from './git-utils'
+import { gitCommit } from './git-utils/commit'
+import GitTagParser from './git-utils/tags'
 import { detectMonorepo } from './monorepo/detect'
 import { findPackages } from './monorepo/packages'
 import { prefix } from './utils/cli-utilities'
 import { selectPackages } from './utils/enquirer'
+import { createFile } from './utils/file'
 import logger from './utils/logger'
 import { bumpVersion } from './version/bump'
 
@@ -38,9 +44,23 @@ async function main() {
     logger.info(`Bumping version for ${chalk.bold(pkg.name)} ...`)
     const res = await bumpVersion(pkg, `${pkg.name}@%s`)
     bumpCache[pkg.name] = res
+    // 创建当前更新日志
+    const parser = new GitTagParser()
+    await parser.fetchTags()
+    const lastTag = parser.lastTag
+    if (lastTag && lastTag === res.tag) {
+      const prevTag = (await parser.getPreviousTag(lastTag, true))?.tag ?? parser.firstTag
+      const commits = await parser.getCommitsBetweenTags(lastTag, prevTag, true)
+      const changelog = generateChangelog(commits, lastTag)
+      const changelogPath = createFile(path.join(pkg.path, 'changelog.md'), changelog)
+      await x('npx', ['eslint', '--fix', changelogPath])
+      await gitCommit([changelogPath], `chore(changelog): ${lastTag}`)
+      await squashLastNCommits(2)
+    }
   }
-  const squash = squashLastNCommits(selected.length)
-  console.log(squash)
+  if (selected.length) {
+    await squashLastNCommits(selected.length)
+  }
 
   // Publish
   // const { confirm } = await enquirer.prompt({
