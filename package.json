@@ -16,10 +16,11 @@
     "test:mkcert": "npm run test -- --project @https-enable/mkcert",
     "test:coverage": "npm run test -- --coverage",
     "release": "npm run build && pnpm release:only",
-    "release:only": "tsx scripts/cli.ts"
+    "release:only": "changeset publish"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^4.1.1",
+    "@changesets/cli": "^2.28.1",
     "@commitlint/cli": "^19.7.1",
     "@commitlint/config-conventional": "^19.7.1",
     "@https-enable/tsconfig": "workspace:*",
