@@ -15,6 +15,7 @@
     "test": "vitest",
     "test:mkcert": "npm run test -- --project @https-enable/mkcert",
     "test:coverage": "npm run test -- --coverage",
+    "ci:bumpp": "bumpp -r",
     "ci:release": "tsx scripts/cli.ts",
     "ci:publish": "tsx scripts/publish/cli.ts publish",
     "ci:changelog": "tsx scripts/changelog/cli.ts"
