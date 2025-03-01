@@ -4,6 +4,7 @@
   "dependencies": {
     "bumpp": "^10.0.3",
     "chalk": "^5.4.1",
+    "commander": "^13.1.0",
     "enquirer": "^2.4.1",
     "execa": "^9.5.2",
     "find-up": "^7.0.0",
