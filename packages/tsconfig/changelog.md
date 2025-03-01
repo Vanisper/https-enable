@@ -160,3 +160,17 @@
 - chore(changelog): @https-enable/logger@{0.0.1-beta.2..0.0.1-beta.6} - by @Vanisper (c6e3ec8)
 - chore(changelog): @https-enable/colors@{0.0.1-beta.2..0.0.1-beta.6} - by @Vanisper (88c5e79)
 - chore(changelog): @https-enable/core@{0.0.1-beta.2..0.0.1-beta.6} - by @Vanisper (e2aa24b)
+
+## @https-enable/tsconfig@0.0.1-beta.9
+
+### 🩹 Fixes: 缺陷修复
+
+- fix(scripts): 🩹 publish 使用 pnpm，并跳过 git 检查 - by @Vanisper (25bae47)
+
+### 🏡 Chore: 简修处理
+
+- chore: release @https-enable/tsconfig@0.0.1-beta.9 - by @Vanisper (bd7dd9e)
+- chore(changelog): @https-enable/mkcert@0.0.1-beta.9 - by @Vanisper (dd28302)
+- chore(changelog): @https-enable/logger@0.0.1-beta.9 - by @Vanisper (bd488a1)
+- chore(changelog): @https-enable/colors@0.0.1-beta.9 - by @Vanisper (84cfc86)
+- chore(changelog): @https-enable/core@0.0.1-beta.9 - by @Vanisper (c636150)
