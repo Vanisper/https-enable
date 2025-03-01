@@ -118,7 +118,7 @@ async function publishPackage(pkg: PackageInfo) {
   // 执行 npm publish 命令
   try {
     console.log(chalk.green(`Publishing ${pkg.name}...`))
-    await x(`npm`, ['publish', pkg.path, '--json', '--access', 'public', '--tag', 'latest'], { ...execOptions })
+    await x(`pnpm`, ['publish', '--json', '--access', 'public', '--tag', 'latest', '--no-git-checks'], { ...execOptions, nodeOptions: { cwd: pkg.path } })
     console.log(chalk.green(`Successfully published ${pkg.name}@${version}`))
   }
   catch (error) {
