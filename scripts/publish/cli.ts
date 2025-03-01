@@ -76,12 +76,12 @@ async function publishPackage(pkg: PackageInfo) {
   console.log(chalk.blue(`Publishing package ${pkg.name} (version: ${version})`))
 
   // 在发布前进行版本检查
-  // const existingTags = await getExistingTags(pkg.name)
+  const existingTags = await getExistingTags(pkg.name)
 
-  // if (existingTags.includes(version)) {
-  //   console.log(chalk.yellow(`Version ${version} of ${pkg.name} already published. Skipping...`))
-  //   return
-  // }
+  if (existingTags.includes(version)) {
+    console.log(chalk.yellow(`Version ${version} of ${pkg.name} already published. Skipping...`))
+    return
+  }
 
   // const pkgDeps = parsePkg(pkg)
   // for (let index = 0; index < pkgDeps.dependencies.length; index++) {

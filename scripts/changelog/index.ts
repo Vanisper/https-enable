@@ -97,7 +97,7 @@ export async function resetChangelog() {
         changelogs.push(generateChangelog(commits, currentTag))
       }
       // TODO: 可以选择拆分更新日志至细分文件
-      const changelogPath = createFile(path.join(pkg.path, 'changelog.md'), changelogs.reverse().join('\n'), true)
+      const changelogPath = createFile(path.join(pkg.path, 'changelog.md'), changelogs.reverse().join('\n'), { cover: true })
       await x('npx', ['eslint', '--fix', changelogPath])
       const commitMsg = `chore(changelog): ${pkg.name}@{${parser.extractScopeProjectVersion(tagsInfo[0]!.tag).version}..${pkg.version}}`
       await gitCommit([changelogPath], commitMsg)

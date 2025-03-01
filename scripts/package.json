@@ -9,7 +9,6 @@
     "enquirer": "^2.4.1",
     "execa": "^9.5.2",
     "find-up": "^7.0.0",
-    "prettier": "^3.5.2",
     "terminal-size": "^4.0.0",
     "tinyexec": "^0.3.2",
     "tinyglobby": "^0.2.10",

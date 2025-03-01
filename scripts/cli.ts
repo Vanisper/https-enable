@@ -52,7 +52,7 @@ async function main() {
       const prevTag = (await parser.getPreviousTag(lastTag, true))?.tag ?? parser.firstTag
       const commits = await parser.getCommitsBetweenTags(lastTag, prevTag, true)
       const changelog = generateChangelog(commits, lastTag)
-      const changelogPath = createFile(path.join(pkg.path, 'changelog.md'), changelog)
+      const changelogPath = createFile(path.join(pkg.path, 'changelog.md'), changelog, { prepend: true })
       await x('npx', ['eslint', '--fix', changelogPath])
       await gitCommit([changelogPath], `chore(changelog): ${lastTag}`)
       await squashLastNCommits(2)
