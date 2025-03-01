@@ -137,3 +137,28 @@
 - ci: 🤖 在测试工作流中添加构建所有项目的步骤 - by @Vanisper (735eb56)
 - ci: 🤖 单元测试工作流更新依赖安装方式 - by @Vanisper (3402182)
 - ci: 🤖 添加 GitHub Actions 工作流以部署测试覆盖率到 GitHub Pages - by @Vanisper (b7f63b1)
+
+## @https-enable/types@0.0.1-beta.7
+
+### 🚀 Features: 新功能
+
+- feat(scripts): 🚀 新增实现 publish 脚本 - by @Vanisper (4e3b1ac)
+- feat: 🚀 添加 Changesets 配置文件和相应脚本 - by @Vanisper (9ff6fb0)
+- feat(scripts): 🚀 新增 `resetChangelog` 工具函数的实现 - by @Vanisper (98c11a0)
+
+### 🏡 Chore: 简修处理
+
+- chore: release @https-enable/types@0.0.1-beta.7 - by @Vanisper (6f6955d)
+- chore(changelog): @https-enable/core@0.0.1-beta.7 - by @Vanisper (110c689)
+- chore(changelog): @https-enable/tsconfig@0.0.1-beta.7 - by @Vanisper (6855d6e)
+- chore(changelog): @https-enable/mkcert@0.0.1-beta.7 - by @Vanisper (3b101b4)
+- chore(changelog): @https-enable/colors@0.0.1-beta.7 - by @Vanisper (8a52b52)
+- chore(changelog): @https-enable/logger@0.0.1-beta.7 - by @Vanisper (86cb80c)
+- chore(changelog): @https-enable/adapter-express@{0.0.1-beta.2..0.0.1-beta.6} - by @Vanisper (a542435)
+- chore(changelog): @https-enable/utils@{0.0.1-beta.2..0.0.1-beta.6} - by @Vanisper (dded152)
+- chore(changelog): @https-enable/types@{0.0.1-beta.2..0.0.1-beta.6} - by @Vanisper (465c7d4)
+- chore(changelog): @https-enable/tsconfig@{0.0.1-beta.2..0.0.1-beta.6} - by @Vanisper (793b72d)
+- chore(changelog): @https-enable/mkcert@{0.0.1-beta.2..0.0.1-beta.6} - by @Vanisper (f8bc8ea)
+- chore(changelog): @https-enable/logger@{0.0.1-beta.2..0.0.1-beta.6} - by @Vanisper (c6e3ec8)
+- chore(changelog): @https-enable/colors@{0.0.1-beta.2..0.0.1-beta.6} - by @Vanisper (88c5e79)
+- chore(changelog): @https-enable/core@{0.0.1-beta.2..0.0.1-beta.6} - by @Vanisper (e2aa24b)
