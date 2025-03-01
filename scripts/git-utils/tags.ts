@@ -2,7 +2,7 @@ import { x } from 'tinyexec'
 
 const execOptions = { throwOnError: true }
 
-interface Tag {
+export interface Tag {
   /* 标签 */
   tag: string
   /* 提交id */
@@ -199,7 +199,7 @@ export class GitTagParser {
     return new Date(result.stdout.trim())
   }
 
-  async getPreviousTag(tag: string, same = false): Promise<Tag | undefined> {
+  async getPreviousTag(tag: string, same = false, pre = false): Promise<Tag | undefined> {
     const currentTagIndex = this.tags.indexOf(tag)
     let prevTag: string | undefined
     if (same === true) {
@@ -223,7 +223,7 @@ export class GitTagParser {
     }
 
     if (prevTag) {
-      return this.getTagInfo(prevTag)
+      return this.getTagInfo(prevTag, pre, same)
     }
 
     return undefined
@@ -234,7 +234,7 @@ export class GitTagParser {
    * @param tag
    * @param pre 默认 false，避免递归
    */
-  async getTagInfo(tag: string, pre = false): Promise<Tag> {
+  async getTagInfo(tag: string, pre = false, same = false): Promise<Tag> {
     const result = await x('git', ['show', tag, '-q', '--pretty=format:"%id=%H&author=%an&date=%ad&sha=%h%"'], execOptions)
     const data = result.stdout.trim()
     const temp = data?.slice(data.indexOf('%') + 1, data.lastIndexOf('%')) || ''
@@ -251,7 +251,7 @@ export class GitTagParser {
     }
 
     // 获取上一个标签
-    pre && (tagResult.pre = await this.getPreviousTag(tag))
+    pre && (tagResult.pre = await this.getPreviousTag(tag, same, pre))
 
     return tagResult
   }
@@ -293,7 +293,7 @@ export class GitTagParser {
   }
 
   // 提取标签中的 scope、project 和 version
-  private extractScopeProjectVersion(tag: string): { scope: string, project: string, version: string } {
+  extractScopeProjectVersion(tag: string): { scope: string, project: string, version: string } {
     let scope = ''
     let project = ''
     let version = ''

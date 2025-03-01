@@ -1,4 +1,13 @@
-import type { ParsedCommit } from '../git-utils/tags'
+import type { ParsedCommit, Tag } from '../git-utils/tags'
+import path from 'node:path'
+import process from 'node:process'
+import chalk from 'chalk'
+import { x } from 'tinyexec'
+import { gitCommit } from '../git-utils/commit'
+import { GitTagParser } from '../git-utils/tags'
+import { detectMonorepo } from '../monorepo/detect'
+import { findPackages } from '../monorepo/packages'
+import { createFile } from '../utils/file'
 
 /* eslint-disable unused-imports/no-unused-vars */
 const commitTypes = [
@@ -45,4 +54,53 @@ export function generateChangelog(commits: ParsedCommit[], title = 'Changelog'):
   changelog.length && changelog.push(`${changelog.pop()}\n`) // 在最后添加换行
 
   return changelog.join('\n')
+}
+
+function getAllTags(tag: Tag): Tag[] {
+  const tags: Tag[] = [tag] // 初始化一个包含当前标签的数组
+  // 如果有 `pre` 标签，递归调用
+  if (tag.pre) {
+    tags.push(...getAllTags(tag.pre)) // 合并结果
+  }
+  return tags
+}
+
+/**
+ * 重建整个项目的 changelog
+ */
+export async function resetChangelog() {
+  const parser = new GitTagParser()
+  await parser.fetchTags()
+
+  console.log(chalk.blue('Checking monorepo structure...'))
+  const monorepo = await detectMonorepo()
+  if (!monorepo) {
+    console.log(chalk.red('Not a pnpm monorepo project'))
+    return process.exit(1)
+  }
+
+  const allPackages = await findPackages(monorepo)
+  const publishable = allPackages.filter(p => !p.private)
+
+  for (const pkg of publishable) {
+    const currTag = `${pkg.name}@${pkg.version}`
+    const prevTag = await parser.getPreviousTag(currTag, true, true)
+    if (prevTag) {
+      const tagsInfo = getAllTags(prevTag).reverse()
+      const tags = [...tagsInfo.map(item => item.tag), currTag]
+
+      const changelogs: string[] = []
+      for (let index = 0; index < tags.length; index++) {
+        const currentTag = tags[index]!
+        const prevTag = tags[index - 1]
+        const commits = await parser.getCommitsBetweenTags(currentTag, prevTag, true)
+        changelogs.push(generateChangelog(commits, currentTag))
+      }
+      // TODO: 可以选择拆分更新日志至细分文件
+      const changelogPath = createFile(path.join(pkg.path, 'changelog.md'), changelogs.reverse().join('\n'), true)
+      await x('npx', ['eslint', '--fix', changelogPath])
+      const commitMsg = `chore(changelog): ${pkg.name}@{${parser.extractScopeProjectVersion(tagsInfo[0]!.tag).version}..${pkg.version}}`
+      await gitCommit([changelogPath], commitMsg)
+    }
+  }
 }
