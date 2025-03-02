@@ -25,6 +25,7 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
+    "@https-enable/logger": "workspace:*",
     "@https-enable/mkcert": "workspace:*"
   },
   "devDependencies": {

@@ -5,6 +5,7 @@ import type { HttpsAdapter } from './https-adapter'
 import type { AppType, CertificateManagerOptions, MiddlewareType, ServerOptions } from './type'
 import { EventEmitter } from 'node:events'
 import { CertificateManager } from './certificate-manager'
+import logger from './logger'
 
 export class HttpsEnabler<
   App extends AppType,
@@ -30,6 +31,16 @@ export class HttpsEnabler<
   }) {
     super()
     this.adapter = config.adapter
+    if (!this.adapter) {
+      throw logger.error('Must provide the adapter')
+    }
+    if (
+      !this.adapter.app
+      || typeof this.adapter.createServer !== 'function'
+    ) {
+      throw logger.error('The adapter is invalid')
+    }
+
     this.options = config.options
     this.certificateOptions = config.certificateOptions
 
