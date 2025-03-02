@@ -11,3 +11,6 @@
 - [x] http 与 https 同端口
 - [ ] nodejs 后端框架 app 的 https 支持
   - [x] adapter-express
+  - [x] adapter-fastify
+  - [x] adapter-koa
+  - [x] adapter-nestjs (Express、Fastify)
