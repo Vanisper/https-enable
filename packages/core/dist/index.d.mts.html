@@ -202,7 +202,55 @@
 <a name='L137'></a><a href='#L137'>137</a>
 <a name='L138'></a><a href='#L138'>138</a>
 <a name='L139'></a><a href='#L139'>139</a>
-<a name='L140'></a><a href='#L140'>140</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L140'></a><a href='#L140'>140</a>
+<a name='L141'></a><a href='#L141'>141</a>
+<a name='L142'></a><a href='#L142'>142</a>
+<a name='L143'></a><a href='#L143'>143</a>
+<a name='L144'></a><a href='#L144'>144</a>
+<a name='L145'></a><a href='#L145'>145</a>
+<a name='L146'></a><a href='#L146'>146</a>
+<a name='L147'></a><a href='#L147'>147</a>
+<a name='L148'></a><a href='#L148'>148</a>
+<a name='L149'></a><a href='#L149'>149</a>
+<a name='L150'></a><a href='#L150'>150</a>
+<a name='L151'></a><a href='#L151'>151</a>
+<a name='L152'></a><a href='#L152'>152</a>
+<a name='L153'></a><a href='#L153'>153</a>
+<a name='L154'></a><a href='#L154'>154</a>
+<a name='L155'></a><a href='#L155'>155</a>
+<a name='L156'></a><a href='#L156'>156</a>
+<a name='L157'></a><a href='#L157'>157</a>
+<a name='L158'></a><a href='#L158'>158</a>
+<a name='L159'></a><a href='#L159'>159</a>
+<a name='L160'></a><a href='#L160'>160</a>
+<a name='L161'></a><a href='#L161'>161</a>
+<a name='L162'></a><a href='#L162'>162</a>
+<a name='L163'></a><a href='#L163'>163</a>
+<a name='L164'></a><a href='#L164'>164</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -344,6 +392,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Certificate, Prettify as Prettify$1, CreateOptions, CertificatePath, VerifyOptions } from '@https-enable/mkcert';
 import { Prettify, MakeOnlyRequired } from '@https-enable/types';
 import http$1 from 'node:http';
+import http2 from 'node:http2';
+import https from 'node:https';
 import { EventEmitter } from 'node:events';
 import * as http from 'http';
 &nbsp;
@@ -392,7 +442,27 @@ type SamePortOptions = Prettify$1&lt;ServerOptions &amp; Certificate &amp;
     redirect?: boolean
   }&gt;
 &nbsp;
-type AppType = http$1.RequestListener&lt;typeof http$1.IncomingMessage, typeof http$1.ServerResponse&gt;
+type RawServerBase = http$1.Server | https.Server | http2.Http2Server | http2.Http2SecureServer
+&nbsp;
+/**
+ * The default request type based on the server type. Utilizes generic constraining.
+ */
+type RawRequestDefaultExpression&lt;
+  RawServer extends RawServerBase = RawServerDefault,
+&gt; = RawServer extends http$1.Server | https.Server ? http$1.IncomingMessage
+  : RawServer extends http2.Http2Server | http2.Http2SecureServer ? http2.Http2ServerRequest
+    : never
+&nbsp;
+/**
+ * The default reply type based on the server type. Utilizes generic constraining.
+ */
+type RawReplyDefaultExpression&lt;
+  RawServer extends RawServerBase = RawServerDefault,
+&gt; = RawServer extends http$1.Server | https.Server ? http$1.ServerResponse
+  : RawServer extends http2.Http2Server | http2.Http2SecureServer ? http2.Http2ServerResponse
+    : never
+&nbsp;
+type AppType = http$1.RequestListener&lt;typeof http$1.IncomingMessage, typeof http$1.ServerResponse&gt; | ((req: RawRequestDefaultExpression&lt;RawServerBase&gt;, res: RawReplyDefaultExpression&lt;RawServerBase&gt;) =&gt; any)
 type MiddlewareType = any
 &nbsp;
 declare class CertificateManager extends EventEmitter&lt;CertificateEvents&gt; {
@@ -420,17 +490,19 @@ declare class CertificateManager extends EventEmitter&lt;CertificateEvents&gt; {
 }
 &nbsp;
 declare abstract class HttpsAdapter&lt;App extends AppType, Middleware = MiddlewareType&gt; {
+    app?: (App | null) | undefined;
     serverInstance: ServerInstance | null;
-    app: App;
-    constructor(app: App);
+    constructor(app?: (App | null) | undefined);
     /**
      * 创建框架特定的中间件
      */
-    abstract createMiddleware: (options: ServerOptions) =&gt; Middleware;
+    abstract createMiddleware?: (options: ServerOptions) =&gt; Middleware;
     /**
      * 重置证书时通知
      */
     abstract onCertRenewed?: (certificate: Certificate) =&gt; any;
+    /** 特殊后端框架可以使用这个自定义返回 app */
+    abstract init?: () =&gt; Promise&lt;App&gt;;
     /**
      * 启动 HTTPS 服务（可选，部分框架需要自定义逻辑）
      */
@@ -463,7 +535,7 @@ declare class HttpsEnabler&lt;App extends AppType, Middleware = MiddlewareType&g
     /**
      * 生成框架特定的中间件
      */
-    middleware(): Middleware;
+    middleware(): Middleware | undefined;
     refresh(options: Certificate): Promise&lt;http.Server&lt;typeof http.IncomingMessage, typeof http.ServerResponse&gt; | undefined&gt; | undefined;
     kill(): Promise&lt;void&gt; | undefined;
     /**
@@ -479,7 +551,7 @@ declare class HttpsEnabler&lt;App extends AppType, Middleware = MiddlewareType&g
     }&gt;;
 }
 &nbsp;
-export { type AppType, CertificateManager, type CertificateManagerOptions, HttpsAdapter, HttpsEnabler, type MiddlewareType, type SamePortOptions, type ServerInstance, type ServerOptions, samePortSSL };
+export { type AppType, CertificateManager, type CertificateManagerOptions, HttpsAdapter, HttpsEnabler, type MiddlewareType, type RawReplyDefaultExpression, type RawRequestDefaultExpression, type RawServerBase, type SamePortOptions, type ServerInstance, type ServerOptions, samePortSSL };
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -487,7 +559,7 @@ export { type AppType, CertificateManager, type CertificateManagerOptions, Https
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-03-02T03:38:12.885Z
+                at 2025-03-02T11:39:56.244Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>
