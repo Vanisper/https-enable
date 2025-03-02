@@ -5,6 +5,7 @@
 ## 功能实现
 
 - [x] 自动生成本地 ssl 证书，基于 [mkcert](https://github.com/Subash/mkcert) 实现
+  - [ ] 接入 [`let's encrypt`](https://letsencrypt.org)，为对生产环境的支持提供可能
 - [x] 证书文件的本地缓存以及自动更新
 - [x] 证书的有效性校验
 - [x] http 与 https 同端口
