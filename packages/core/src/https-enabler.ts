@@ -35,7 +35,7 @@ export class HttpsEnabler<
       throw logger.error('Must provide the adapter')
     }
     if (
-      !this.adapter.app
+      (!this.adapter.app && (!this.adapter.init || typeof this.adapter.init !== 'function'))
       || typeof this.adapter.createServer !== 'function'
     ) {
       throw logger.error('The adapter is invalid')

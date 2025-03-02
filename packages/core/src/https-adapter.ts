@@ -4,11 +4,8 @@ import { samePortSSL } from './same-port-ssl'
 
 export abstract class HttpsAdapter<App extends AppType, Middleware = MiddlewareType> {
   public serverInstance: ServerInstance | null = null
-  public app: App
 
-  constructor(app: App) {
-    this.app = app
-  }
+  constructor(public app?: App | null) {}
 
   /**
    * 创建框架特定的中间件
@@ -20,11 +17,21 @@ export abstract class HttpsAdapter<App extends AppType, Middleware = MiddlewareT
    */
   abstract onCertRenewed?: (certificate: Certificate) => any
 
+  /** 特殊后端框架可以使用这个自定义返回 app */
+  abstract init?: () => Promise<App>
+
   /**
    * 启动 HTTPS 服务（可选，部分框架需要自定义逻辑）
    */
   async createServer(options: SamePortOptions, app?: App) {
-    this.serverInstance = await samePortSSL(app ?? this.app, options)
+    let tempApp = app ?? this.app
+    if (this.init && typeof this.init === 'function') {
+      tempApp = await this.init()
+    }
+    if (!tempApp && !this.app) {
+      throw new Error('`app` is no found')
+    }
+    this.serverInstance = await samePortSSL((tempApp ?? this.app)!, options)
     return this.serverInstance
   }
 }
