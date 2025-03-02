@@ -7,6 +7,9 @@ export default defineBuildConfig({
   rollup: {
     emitCJS: true,
     inlineDependencies: false,
+    output: {
+      exports: 'named',
+    },
   },
   failOnWarn: false,
   // 声明隐式外部依赖（消除构建时警告）

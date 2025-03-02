@@ -6,7 +6,7 @@ import format, { levels } from './format'
 import { transports as Transports } from './transports'
 import { configs, LEVEL } from './triple-beam'
 
-export class Logger {
+export default class Logger {
   private level: LogLevelKey
   private levels: LogLevel | Record<string, number>
   private silent: boolean
@@ -136,6 +136,4 @@ export class Logger {
   }
 }
 
-export default Logger
-
-export { format, Transports }
+export { format, Logger, Transports }
