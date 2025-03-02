@@ -1,6 +1,6 @@
-import type { INestApplication } from '@nestjs/common';
-import type { TestingModule } from '@nestjs/testing';
-import type { App } from 'supertest/types';
+import { INestApplication } from '@nestjs/common';
+import { TestingModule } from '@nestjs/testing';
+import { App } from 'supertest/types';
 import { Test } from '@nestjs/testing';
 import * as request from 'supertest';
 import { AppModule } from './../src/app.module';

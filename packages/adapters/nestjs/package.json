@@ -1,0 +1,45 @@
+{
+  "name": "@https-enable/adapter-nestjs",
+  "version": "0.1.0",
+  "license": "MIT",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "scripts": {
+    "build": "unbuild",
+    "dev": "unbuild --stub",
+    "release": "npm run build && bumpp",
+    "prepublishOnly": "npm run build"
+  },
+  "peerDependencies": {
+    "@https-enable/core": "workspace:*",
+    "@nestjs/common": "*",
+    "@nestjs/core": "*",
+    "@nestjs/platform-express": "*",
+    "@nestjs/platform-fastify": "*",
+    "@types/express": "*"
+  },
+  "dependencies": {
+    "@https-enable/mkcert": "workspace:*"
+  },
+  "devDependencies": {
+    "@https-enable/tsconfig": "workspace:*",
+    "@https-enable/types": "workspace:*",
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.13.1",
+    "unbuild": "^3.3.1"
+  }
+}
