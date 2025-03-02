@@ -64,7 +64,7 @@ export class HttpsEnabler<
    * 生成框架特定的中间件
    */
   public middleware() {
-    return this.adapter.createMiddleware(this.options)
+    return this.adapter.createMiddleware?.(this.options)
   }
 
   public refresh(options: Certificate) {

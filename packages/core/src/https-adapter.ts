@@ -10,7 +10,7 @@ export abstract class HttpsAdapter<App extends AppType, Middleware = MiddlewareT
   /**
    * 创建框架特定的中间件
    */
-  abstract createMiddleware: (options: ServerOptions) => Middleware
+  abstract createMiddleware?: (options: ServerOptions) => Middleware
 
   /**
    * 重置证书时通知
