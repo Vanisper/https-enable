@@ -1,0 +1,14 @@
+{
+  "name": "fastify-demo",
+  "type": "module",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js"
+  },
+  "dependencies": {
+    "@https-enable/adapter-fastify": "workspace:*",
+    "@https-enable/core": "workspace:*",
+    "fastify": "^5.2.1"
+  }
+}

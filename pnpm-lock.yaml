@@ -69,6 +69,18 @@ importers:
         specifier: ^4.21.2
         version: 4.21.2
 
+  examples/fastify:
+    dependencies:
+      '@https-enable/adapter-fastify':
+        specifier: workspace:*
+        version: link:../../packages/adapters/fastify
+      '@https-enable/core':
+        specifier: workspace:*
+        version: link:../../packages/core
+      fastify:
+        specifier: ^5.2.1
+        version: 5.2.1
+
   examples/nestjs:
     dependencies:
       '@https-enable/adapter-nestjs':
@@ -193,6 +205,31 @@ importers:
       '@types/express':
         specifier: ^5.0.0
         version: 5.0.0
+      '@types/node':
+        specifier: ^22.13.1
+        version: 22.13.8
+      unbuild:
+        specifier: ^3.3.1
+        version: 3.5.0(typescript@5.7.3)
+
+  packages/adapters/fastify:
+    dependencies:
+      '@https-enable/core':
+        specifier: workspace:*
+        version: link:../../core
+      '@https-enable/mkcert':
+        specifier: workspace:*
+        version: link:../../mkcert
+      fastify:
+        specifier: '*'
+        version: 5.2.1
+    devDependencies:
+      '@https-enable/tsconfig':
+        specifier: workspace:*
+        version: link:../../tsconfig
+      '@https-enable/types':
+        specifier: workspace:*
+        version: link:../../types
       '@types/node':
         specifier: ^22.13.1
         version: 22.13.8
