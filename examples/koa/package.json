@@ -1,0 +1,17 @@
+{
+  "name": "koa-demo",
+  "type": "module",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js"
+  },
+  "dependencies": {
+    "@https-enable/adapter-koa": "workspace:*",
+    "@https-enable/core": "workspace:*",
+    "koa": "^2.16.0"
+  },
+  "devDependencies": {
+    "@types/koa": "^2.15.0"
+  }
+}
