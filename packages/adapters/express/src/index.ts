@@ -21,5 +21,6 @@ export class ExpressHttpsAdapter extends HttpsAdapter<Application, RequestHandle
       }
     }
 
-  onCertRenewed?: ((certificate: Certificate) => any) | undefined
+  init?: () => Promise<Application>
+  onCertRenewed?: (certificate: Certificate) => any
 }
