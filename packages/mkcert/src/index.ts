@@ -57,6 +57,5 @@ export async function defineCertificate(options?: Pick<CreateOptions, 'validity'
 }
 
 export * from './common'
-export * from './logger'
 export type * from './type'
 export * from './verify'
